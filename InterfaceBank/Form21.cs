@@ -164,22 +164,30 @@ namespace InterfaceBank
                         }
                         else
                         {
-                            sqlCommandDelTransfer.Parameters["@fioW"].Value = fioWorker.Text;
-                            sqlCommandDelTransfer.Parameters["@phone"].Value = phone.Text;
-                            sqlCommandDelTransfer.Parameters["@fioSender"].Value = fioSender.Text;
-                            sqlCommandDelTransfer.Parameters["@pasportSender"].Value = pasportSender.Text;
-                            sqlCommandDelTransfer.Parameters["@summa"].Value = money.Text;
-                            sqlCommandDelTransfer.Parameters["@schetSender"].Value = schetSender.Text;
-                            sqlCommandDelTransfer.Parameters["@fioRecipient"].Value = fioRecipient.Text;
-                            sqlCommandDelTransfer.Parameters["@pasportRecipient"].Value = pasportRecipient.Text;
-                            sqlCommandDelTransfer.Parameters["@schetRecipient"].Value = schetRecipient.Text;
-                            sqlCommandDelTransfer.Parameters["@dateop"].Value = date.Text;
+                            DialogResult dialogResult = MessageBox.Show("Вы действительно хотите отменить перевод?", "", MessageBoxButtons.YesNo);
+                            if (dialogResult == DialogResult.Yes)
+                            {
+                                sqlCommandDelTransfer.Parameters["@fioW"].Value = fioWorker.Text;
+                                sqlCommandDelTransfer.Parameters["@phone"].Value = phone.Text;
+                                sqlCommandDelTransfer.Parameters["@fioSender"].Value = fioSender.Text;
+                                sqlCommandDelTransfer.Parameters["@pasportSender"].Value = pasportSender.Text;
+                                sqlCommandDelTransfer.Parameters["@summa"].Value = money.Text;
+                                sqlCommandDelTransfer.Parameters["@schetSender"].Value = schetSender.Text;
+                                sqlCommandDelTransfer.Parameters["@fioRecipient"].Value = fioRecipient.Text;
+                                sqlCommandDelTransfer.Parameters["@pasportRecipient"].Value = pasportRecipient.Text;
+                                sqlCommandDelTransfer.Parameters["@schetRecipient"].Value = schetRecipient.Text;
+                                sqlCommandDelTransfer.Parameters["@dateop"].Value = date.Text;
 
-                            sqlConnectionDoTransfer.Open();
-                            sqlCommandDelTransfer.ExecuteNonQuery();
-                            sqlConnectionDoTransfer.Close();
-                            String result = (String)sqlCommandDelTransfer.Parameters["@res"].Value;
-                            MessageBox.Show(result);
+                                sqlConnectionDoTransfer.Open();
+                                sqlCommandDelTransfer.ExecuteNonQuery();
+                                sqlConnectionDoTransfer.Close();
+                                String result = (String)sqlCommandDelTransfer.Parameters["@res"].Value;
+                                MessageBox.Show(result);
+                            }
+                            else if (dialogResult == DialogResult.No)
+                            {
+                                MessageBox.Show("Операция отменена!");
+                            }
                         }
                     }
                 }

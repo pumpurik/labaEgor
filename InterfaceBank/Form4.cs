@@ -38,8 +38,15 @@ namespace InterfaceBank
 
         private void zayavka_Click(object sender, EventArgs e)
         {
-            Form SchetaOp = new Scheta();
-            SchetaOp.Show();
+            Form AddSchetClient = new AddSchetClient();
+            AddSchetClient.Show();
+            this.Hide();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Form sendPaymentOrder = new sendPaymentOrder();
+            sendPaymentOrder.Show();
             this.Hide();
         }
     }

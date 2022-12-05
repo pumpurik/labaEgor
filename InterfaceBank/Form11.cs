@@ -55,35 +55,31 @@ namespace InterfaceBank
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (Fio.Text == "" || pasport.Text == "" )
+            if (Fio.Text == "" || pasport.Text == "")
             {
                 MessageBox.Show("Поля 'ФИО' и 'паспорт' обязательны к заполнению!");
             }
-            if (pasport.TextLength < 10)
-            {
-                MessageBox.Show("Введите корректные паспортные данные!");
-            }
             else
             {
-                sqlCommandGetClient.Parameters["@name"].Value = Fio.Text;
-                sqlCommandGetClient.Parameters["@passport"].Value = pasport.Text;
-                sqlConnectionClient.Open();
-                // создать временную таблицу temp
-                var temp = new DataTable();
-                // выполнить табличную функцию и вернуть таблицу в объект Reader
-                // заполнить таблицу temp данными из Reader
-                temp.Load(sqlCommandGetClient.ExecuteReader());
-                //устанавить связь с объектом типа dataGridView
-                Client.DataSource = temp;
-                int rows = Client.Rows.Count;
-                if (rows == 0)
+                if (pasport.TextLength < 10)
                 {
-                    MessageBox.Show("Такого клиента не существует!");
-
-                    // закрыть соединение с БД
-                    
+                    MessageBox.Show("Введите корректные паспортные данные!");
                 }
-                sqlConnectionClient.Close();
+                else
+                {
+                    sqlCommandGetClient.Parameters["@name"].Value = Fio.Text;
+                    sqlCommandGetClient.Parameters["@passport"].Value = pasport.Text;
+                    sqlConnectionClient.Open();
+                    var temp = new DataTable();
+                    temp.Load(sqlCommandGetClient.ExecuteReader());
+                    Client.DataSource = temp;
+                    int rows = Client.Rows.Count;
+                    if (rows == 0)
+                    {
+                        MessageBox.Show("Такого клиента не существует!");
+                    }
+                    sqlConnectionClient.Close();
+                }
             }
             
         }

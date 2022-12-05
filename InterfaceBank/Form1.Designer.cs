@@ -70,6 +70,7 @@
             this.password.Name = "password";
             this.password.Size = new System.Drawing.Size(267, 20);
             this.password.TabIndex = 3;
+            this.password.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.password_KeyPress);
             // 
             // buttonLogin
             // 

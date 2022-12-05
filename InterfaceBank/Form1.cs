@@ -34,8 +34,8 @@ namespace InterfaceBank
                 if (result == 0)
                 {
                     MessageBox.Show("Неправильно введен логин или пароль!");
-                    /*username.Text = "";
-                    password.Text = "";*/
+                    username.Text = "";
+                    password.Text = "";
                 }
                 else if (result == 1)
                 {
@@ -72,6 +72,18 @@ namespace InterfaceBank
 
         private void sqlConnectionLog_InfoMessage(object sender, System.Data.SqlClient.SqlInfoMessageEventArgs e)
         {
+        }
+
+        private void password_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (Char.IsNumber(e.KeyChar) | (e.KeyChar == Convert.ToChar(",")) | e.KeyChar == '\b')
+            {
+                return;
+            }
+            else
+            {
+                e.Handled = true;
+            }
         }
     }
 }

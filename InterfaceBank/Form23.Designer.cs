@@ -46,11 +46,11 @@
             this.clients = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.date = new System.Windows.Forms.DateTimePicker();
-            this.label8 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.sqlConnectionInsCur = new System.Data.SqlClient.SqlConnection();
             this.sqlCommandInsCur = new System.Data.SqlClient.SqlCommand();
             this.sqlCommandDelCur = new System.Data.SqlClient.SqlCommand();
+            this.label9 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -213,40 +213,31 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.panel1.Controls.Add(this.label9);
             this.panel1.Controls.Add(this.date);
-            this.panel1.Controls.Add(this.label8);
             this.panel1.Controls.Add(this.button2);
-            this.panel1.Location = new System.Drawing.Point(689, 27);
+            this.panel1.Location = new System.Drawing.Point(683, 27);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(395, 275);
+            this.panel1.Size = new System.Drawing.Size(424, 284);
             this.panel1.TabIndex = 50;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // date
             // 
             this.date.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.date.Location = new System.Drawing.Point(113, 96);
+            this.date.Location = new System.Drawing.Point(125, 86);
             this.date.MaxDate = new System.DateTime(2022, 12, 25, 23, 59, 59, 0);
             this.date.MinDate = new System.DateTime(2019, 1, 1, 0, 0, 0, 0);
             this.date.Name = "date";
             this.date.Size = new System.Drawing.Size(174, 24);
             this.date.TabIndex = 46;
             this.date.Value = new System.DateTime(2022, 12, 2, 0, 0, 0, 0);
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label8.Location = new System.Drawing.Point(15, 52);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(356, 24);
-            this.label8.TabIndex = 45;
-            this.label8.Text = "Для отмены выберите дату перевода:";
+            this.date.ValueChanged += new System.EventHandler(this.date_ValueChanged);
             // 
             // button2
             // 
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button2.Location = new System.Drawing.Point(113, 147);
+            this.button2.Location = new System.Drawing.Point(125, 131);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(175, 84);
             this.button2.TabIndex = 14;
@@ -291,6 +282,16 @@
             new System.Data.SqlClient.SqlParameter("@cur", System.Data.SqlDbType.VarChar),
             new System.Data.SqlClient.SqlParameter("@dateop", System.Data.SqlDbType.Date),
             new System.Data.SqlClient.SqlParameter("@res", System.Data.SqlDbType.VarChar, 1000, System.Data.ParameterDirection.Output, false, ((byte)(0)), ((byte)(0)), "", System.Data.DataRowVersion.Current, null)});
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label9.Location = new System.Drawing.Point(6, 48);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(415, 24);
+            this.label9.TabIndex = 47;
+            this.label9.Text = "Для отмены также выберите дату перевода:";
             // 
             // Currency
             // 
@@ -344,10 +345,10 @@
         private System.Windows.Forms.Button clients;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.DateTimePicker date;
-        private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button button2;
         private System.Data.SqlClient.SqlConnection sqlConnectionInsCur;
         private System.Data.SqlClient.SqlCommand sqlCommandInsCur;
         private System.Data.SqlClient.SqlCommand sqlCommandDelCur;
+        private System.Windows.Forms.Label label9;
     }
 }

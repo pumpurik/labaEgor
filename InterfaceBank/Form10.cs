@@ -40,7 +40,7 @@ namespace InterfaceBank
         {
             if (Fio.Text == "" || money.Text == "" || scheta.Text == "")
             {
-                MessageBox.Show("Заполните данные!");
+                MessageBox.Show("Заполните все данные!");
             }
             else
             {

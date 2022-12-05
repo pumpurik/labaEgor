@@ -61,27 +61,33 @@ namespace InterfaceBank
             {
                 MessageBox.Show("Заполните все данные!");
             }
-            if (phone.TextLength<11)
-            {
-                MessageBox.Show("Номер телефона заполнен неверно!");
-            }
-            if (pasport.TextLength<10)
-            {
-                MessageBox.Show("Введите корректные паспортные данные!");
-            }
             else
             {
-                sqlCommandInsClient.Parameters["@fio"].Value = Fio.Text;
-                sqlCommandInsClient.Parameters["@pasport"].Value = pasport.Text;
-                sqlCommandInsClient.Parameters["@phone"].Value = phone.Text;
-                sqlCommandInsClient.Parameters["@birth"].Value = date.Text;
-                sqlCommandInsClient.Parameters["@gender"].Value = gender.Text;
+                if (phone.TextLength < 11)
+                {
+                    MessageBox.Show("Номер телефона заполнен неверно!");
+                }
+                else
+                {
+                    if (pasport.TextLength < 10)
+                    {
+                        MessageBox.Show("Введите корректные паспортные данные!");
+                    }
+                    else
+                    {
+                        sqlCommandInsClient.Parameters["@fio"].Value = Fio.Text;
+                        sqlCommandInsClient.Parameters["@pasport"].Value = pasport.Text;
+                        sqlCommandInsClient.Parameters["@phone"].Value = phone.Text;
+                        sqlCommandInsClient.Parameters["@birth"].Value = date.Text;
+                        sqlCommandInsClient.Parameters["@gender"].Value = gender.Text;
 
-                sqlConnectionInsClient.Open();
-                sqlCommandInsClient.ExecuteNonQuery();
-                sqlConnectionInsClient.Close();
-                String result = (String)sqlCommandInsClient.Parameters["@res"].Value;
-                MessageBox.Show(result);
+                        sqlConnectionInsClient.Open();
+                        sqlCommandInsClient.ExecuteNonQuery();
+                        sqlConnectionInsClient.Close();
+                        String result = (String)sqlCommandInsClient.Parameters["@res"].Value;
+                        MessageBox.Show(result);
+                    }
+                }
             }
         }
 

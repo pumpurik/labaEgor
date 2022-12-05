@@ -71,7 +71,7 @@
             // button2
             // 
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button2.Location = new System.Drawing.Point(113, 147);
+            this.button2.Location = new System.Drawing.Point(134, 147);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(175, 84);
             this.button2.TabIndex = 14;
@@ -289,7 +289,7 @@
             // date
             // 
             this.date.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.date.Location = new System.Drawing.Point(113, 96);
+            this.date.Location = new System.Drawing.Point(134, 96);
             this.date.MaxDate = new System.DateTime(2022, 12, 25, 23, 59, 59, 0);
             this.date.MinDate = new System.DateTime(2019, 1, 1, 0, 0, 0, 0);
             this.date.Name = "date";
@@ -303,9 +303,9 @@
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label8.Location = new System.Drawing.Point(15, 52);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(356, 24);
+            this.label8.Size = new System.Drawing.Size(415, 24);
             this.label8.TabIndex = 45;
-            this.label8.Text = "Для отмены выберите дату перевода:";
+            this.label8.Text = "Для отмены также выберите дату перевода:";
             // 
             // panel1
             // 
@@ -313,9 +313,9 @@
             this.panel1.Controls.Add(this.date);
             this.panel1.Controls.Add(this.label8);
             this.panel1.Controls.Add(this.button2);
-            this.panel1.Location = new System.Drawing.Point(705, 95);
+            this.panel1.Location = new System.Drawing.Point(667, 95);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(395, 275);
+            this.panel1.Size = new System.Drawing.Size(433, 299);
             this.panel1.TabIndex = 47;
             // 
             // sqlCommandDelTransfer

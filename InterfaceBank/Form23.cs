@@ -133,25 +133,43 @@ namespace InterfaceBank
                     }
                     else
                     {
-                        sqlCommandDelCur.Parameters["@fioW"].Value = fioWorker.Text;
-                        sqlCommandDelCur.Parameters["@phone"].Value = phone.Text;
-                        sqlCommandDelCur.Parameters["@fioClient"].Value = fioClient.Text;
-                        sqlCommandDelCur.Parameters["@pasport"].Value = pasport.Text;
-                        sqlCommandDelCur.Parameters["@summa"].Value = money.Text;
-                        sqlCommandDelCur.Parameters["@schet"].Value = schet.Text;
-                        sqlCommandDelCur.Parameters["@cur"].Value = cur.Text;
-                        sqlCommandDelCur.Parameters["@dateop"].Value = date.Text;
+                        DialogResult dialogResult = MessageBox.Show("Вы действительно хотите отменить перевод?", "", MessageBoxButtons.YesNo);
+                        if (dialogResult == DialogResult.Yes)
+                        {
+                            sqlCommandDelCur.Parameters["@fioW"].Value = fioWorker.Text;
+                            sqlCommandDelCur.Parameters["@phone"].Value = phone.Text;
+                            sqlCommandDelCur.Parameters["@fioClient"].Value = fioClient.Text;
+                            sqlCommandDelCur.Parameters["@pasport"].Value = pasport.Text;
+                            sqlCommandDelCur.Parameters["@summa"].Value = money.Text;
+                            sqlCommandDelCur.Parameters["@schet"].Value = schet.Text;
+                            sqlCommandDelCur.Parameters["@cur"].Value = cur.Text;
+                            sqlCommandDelCur.Parameters["@dateop"].Value = date.Text;
 
 
-                        sqlConnectionInsCur.Open();
-                        sqlCommandDelCur.ExecuteNonQuery();
-                        sqlConnectionInsCur.Close();
-                        String result = (String)sqlCommandDelCur.Parameters["@res"].Value;
-                        MessageBox.Show(result);
+                            sqlConnectionInsCur.Open();
+                            sqlCommandDelCur.ExecuteNonQuery();
+                            sqlConnectionInsCur.Close();
+                            String result = (String)sqlCommandDelCur.Parameters["@res"].Value;
+                            MessageBox.Show(result);
+                        }
+                        else if (dialogResult == DialogResult.No)
+                        {
+                            MessageBox.Show("Операция отменена!");
+                        }
                     }
 
                 }
             }
+        }
+
+        private void label8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void date_ValueChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

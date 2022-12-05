@@ -88,6 +88,7 @@
             this.phone.Name = "phone";
             this.phone.Size = new System.Drawing.Size(190, 20);
             this.phone.TabIndex = 13;
+            this.phone.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.phone_KeyPress);
             // 
             // Search
             // 

@@ -55,31 +55,27 @@ namespace InterfaceBank
             {
                 MessageBox.Show("Поля 'ФИО' и 'номер телефона' обязательны к заполнению!");
             }
-            if (phone.TextLength < 11)
-            {
-                MessageBox.Show("Введите корректный номер телефона!");
-            }
             else
             {
-                sqlCommandGetWorker.Parameters["@name"].Value = Fio.Text;
-                sqlCommandGetWorker.Parameters["@phone"].Value = phone.Text;
-                sqlConnectionWorker.Open();
-                // создать временную таблицу temp
-                var temp = new DataTable();
-                // выполнить табличную функцию и вернуть таблицу в объект Reader
-                // заполнить таблицу temp данными из Reader
-                temp.Load(sqlCommandGetWorker.ExecuteReader());
-                //устанавить связь с объектом типа dataGridView
-                Worker.DataSource = temp;
-                int rows = Worker.Rows.Count;
-                if (rows == 0)
+                if (phone.TextLength < 11)
                 {
-                    MessageBox.Show("Такого клиента не существует!");
-
-                    // закрыть соединение с БД
-
+                    MessageBox.Show("Введите корректный номер телефона!");
                 }
-                sqlConnectionWorker.Close();
+                else
+                {
+                    sqlCommandGetWorker.Parameters["@name"].Value = Fio.Text;
+                    sqlCommandGetWorker.Parameters["@phone"].Value = phone.Text;
+                    sqlConnectionWorker.Open();
+                    var temp = new DataTable();
+                    temp.Load(sqlCommandGetWorker.ExecuteReader());
+                    Worker.DataSource = temp;
+                    int rows = Worker.Rows.Count;
+                    if (rows == 0)
+                    {
+                        MessageBox.Show("Такого клиента не существует!");
+                    }
+                    sqlConnectionWorker.Close();
+                }
             }
         }
 
@@ -95,6 +91,19 @@ namespace InterfaceBank
             Form updateWorker = new updateWorker();
             updateWorker.Show();
             this.Hide();
+        }
+
+        private void phone_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            phone.MaxLength = 11;
+            if (Char.IsNumber(e.KeyChar) | (e.KeyChar == Convert.ToChar(",")) | e.KeyChar == '\b')
+            {
+                return;
+            }
+            else
+            {
+                e.Handled = true;
+            }
         }
     }
 }
