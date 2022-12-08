@@ -73,7 +73,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label2.Location = new System.Drawing.Point(30, 150);
+            this.label2.Location = new System.Drawing.Point(30, 155);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(302, 24);
             this.label2.TabIndex = 8;
@@ -81,7 +81,7 @@
             // 
             // money
             // 
-            this.money.Location = new System.Drawing.Point(338, 155);
+            this.money.Location = new System.Drawing.Point(338, 160);
             this.money.Name = "money";
             this.money.ShortcutsEnabled = false;
             this.money.Size = new System.Drawing.Size(190, 20);

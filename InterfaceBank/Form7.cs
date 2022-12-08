@@ -30,7 +30,17 @@ namespace InterfaceBank
             }
             else
             {
-                if (pasport.TextLength != 0 & pasport.TextLength < 10)
+                for (int i = 0; i < pasport.TextLength; i++)
+                {
+                    char ch = pasport.Text[i];
+                    if (ch < 48 || ch > 57)
+                    {
+                        pasport.Text = "";
+                        break;
+                    }
+
+                }
+                if ((pasport.TextLength != 0 & pasport.TextLength < 10) || pasport.Text == "")
                 {
                     MessageBox.Show("Введите корректные паспортные данные!");
                 }
@@ -67,15 +77,7 @@ namespace InterfaceBank
 
         private void pasport_KeyPress(object sender, KeyPressEventArgs e)
         {
-            pasport.MaxLength = 10;
-            if (Char.IsNumber(e.KeyChar) | (e.KeyChar == Convert.ToChar(",")) | e.KeyChar == '\b')
-            {
-                return;
-            }
-            else
-            {
-                e.Handled = true;
-            }
+            pasport.MaxLength = 10;   
         }
     }
 }

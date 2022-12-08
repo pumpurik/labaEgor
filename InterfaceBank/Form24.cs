@@ -37,26 +37,12 @@ namespace InterfaceBank
         private void pasport_KeyPress(object sender, KeyPressEventArgs e)
         {
             pasport.MaxLength = 10;
-            if (Char.IsNumber(e.KeyChar) | (e.KeyChar == Convert.ToChar(",")) | e.KeyChar == '\b')
-            {
-                return;
-            }
-            else
-            {
-                e.Handled = true;
-            }
+
         }
 
         private void money_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (Char.IsNumber(e.KeyChar) | (e.KeyChar == Convert.ToChar(",")) | e.KeyChar == '\b')
-            {
-                return;
-            }
-            else
-            {
-                e.Handled = true;
-            }
+
         }
 
         private void Open_Click(object sender, EventArgs e)
@@ -67,23 +53,50 @@ namespace InterfaceBank
             }
             else
             {
-                if (pasport.TextLength != 0 & pasport.TextLength < 10)
+                for (int i = 0; i < pasport.TextLength; i++)
+                {
+                    char ch = pasport.Text[i];
+                    if (ch < 48 || ch > 57)
+                    {
+                        pasport.Text = "";
+                        break;
+                    }
+
+                }
+                if ((pasport.TextLength != 0 & pasport.TextLength < 10) || pasport.Text == "")
                 {
                     MessageBox.Show("Введите корректные паспортные данные!");
                 }
                 else
                 {
-                    sqlCommandInsAcc.Parameters["@fioClient"].Value = fioClient.Text;
-                    sqlCommandInsAcc.Parameters["@pasport"].Value = pasport.Text;
-                    sqlCommandInsAcc.Parameters["@summa"].Value = money.Text;
-                    sqlCommandInsAcc.Parameters["@schet"].Value = schet.Text;
-                    sqlCommandInsAcc.Parameters["@dateop"].Value = DateTime.Now;
+                    for (int i = 0; i < money.TextLength; i++)
+                    {
+                        char ch = money.Text[i];
+                        if (ch < 48 || ch > 57)
+                        {
+                            money.Text = "";
+                            break;
+                        }
 
-                    sqlConnectionAccount.Open();
-                    sqlCommandInsAcc.ExecuteNonQuery();
-                    sqlConnectionAccount.Close();
-                    String result = (String)sqlCommandInsAcc.Parameters["@res"].Value;
-                    MessageBox.Show(result);
+                    }
+                    if (money.Text == "")
+                    {
+                        MessageBox.Show("Введите корректную сумму счета!");
+                    }
+                    else
+                    {
+                        sqlCommandInsAcc.Parameters["@fioClient"].Value = fioClient.Text;
+                        sqlCommandInsAcc.Parameters["@pasport"].Value = pasport.Text;
+                        sqlCommandInsAcc.Parameters["@summa"].Value = money.Text;
+                        sqlCommandInsAcc.Parameters["@schet"].Value = schet.Text;
+                        sqlCommandInsAcc.Parameters["@dateop"].Value = DateTime.Now;
+
+                        sqlConnectionAccount.Open();
+                        sqlCommandInsAcc.ExecuteNonQuery();
+                        sqlConnectionAccount.Close();
+                        String result = (String)sqlCommandInsAcc.Parameters["@res"].Value;
+                        MessageBox.Show(result);
+                    }
                 }
             }
         }
@@ -101,7 +114,17 @@ namespace InterfaceBank
             }
             else
             {
-                if (pasport.TextLength != 0 & pasport.TextLength < 10)
+                for (int i = 0; i < pasport.TextLength; i++)
+                {
+                    char ch = pasport.Text[i];
+                    if (ch < 48 || ch > 57)
+                    {
+                        pasport.Text = "";
+                        break;
+                    }
+
+                }
+                if ((pasport.TextLength != 0 & pasport.TextLength < 10) || pasport.Text == "")
                 {
                     MessageBox.Show("Введите корректные паспортные данные!");
                 }

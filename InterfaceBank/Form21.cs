@@ -15,6 +15,8 @@ namespace InterfaceBank
         public Transfers()
         {
             InitializeComponent();
+            DateTime now = DateTime.Now;
+            date.Value = now;
         }
 
         private void Transfers_KeyPress(object sender, KeyPressEventArgs e)
@@ -37,40 +39,87 @@ namespace InterfaceBank
             }
             else
             {
-                if (pasportSender.TextLength != 0 & pasportSender.TextLength < 10)
+                for (int i = 0; i < pasportSender.TextLength; i++)
                 {
-                    MessageBox.Show("Введите корректные паспортные данные!");
+                    char ch = pasportSender.Text[i];
+                    if (ch < 48 || ch > 57)
+                    {
+                        pasportSender.Text = "";
+                        break;
+                    }
+
+                }
+                if ((pasportSender.TextLength != 0 & pasportSender.TextLength < 10) || pasportSender.Text == "")
+                {
+                    MessageBox.Show("Введите корректные паспортные данные отправителя!");
                 }
                 else
                 {
-                    if (pasportRecipient.TextLength != 0 & pasportRecipient.TextLength < 10)
+                    for (int i = 0; i < pasportRecipient.TextLength; i++)
                     {
-                        MessageBox.Show("Введите корректные паспортные данные!");
+                        char ch = pasportRecipient.Text[i];
+                        if (ch < 48 || ch > 57)
+                        {
+                            pasportRecipient.Text = "";
+                            break;
+                        }
+
+                    }
+                    if ((pasportRecipient.TextLength != 0 & pasportRecipient.TextLength < 10) || pasportRecipient.Text=="")
+                    {
+                        MessageBox.Show("Введите корректные паспортные данные получателя!");
                     }
                     else
                     {
-                        if (phone.TextLength != 0 & phone.TextLength < 11)
+                        for (int i = 0; i < phone.TextLength; i++)
                         {
-                            MessageBox.Show("Введите корректные паспортные данные!");
+                            char ch = phone.Text[i];
+                            if (ch < 48 || ch > 57)
+                            {
+                                phone.Text = "";
+                                break;
+                            }
+
+                        }
+                        if ((phone.TextLength != 0 & phone.TextLength < 11) || phone.Text == "")
+                        {
+                            MessageBox.Show("Введите корректный номер телефона!");
                         }
                         else
                         {
-                            sqlCommandDoTransfer.Parameters["@fioW"].Value = fioWorker.Text;
-                            sqlCommandDoTransfer.Parameters["@phone"].Value = phone.Text;
-                            sqlCommandDoTransfer.Parameters["@fioSender"].Value = fioSender.Text;
-                            sqlCommandDoTransfer.Parameters["@pasportSender"].Value = pasportSender.Text;
-                            sqlCommandDoTransfer.Parameters["@summa"].Value = money.Text;
-                            sqlCommandDoTransfer.Parameters["@schetSender"].Value = schetSender.Text;
-                            sqlCommandDoTransfer.Parameters["@fioRecipient"].Value = fioRecipient.Text;
-                            sqlCommandDoTransfer.Parameters["@pasportRecipient"].Value = pasportRecipient.Text;
-                            sqlCommandDoTransfer.Parameters["@schetRecipient"].Value = schetRecipient.Text;
-                            sqlCommandDoTransfer.Parameters["@dateop"].Value = DateTime.Now;
+                            for (int i = 0; i < money.TextLength; i++)
+                            {
+                                char ch = money.Text[i];
+                                if (ch < 48 || ch > 57)
+                                {
+                                    money.Text = "";
+                                    break;
+                                }
 
-                            sqlConnectionDoTransfer.Open();
-                            sqlCommandDoTransfer.ExecuteNonQuery();
-                            sqlConnectionDoTransfer.Close();
-                            String result = (String)sqlCommandDoTransfer.Parameters["@res"].Value;
-                            MessageBox.Show(result);
+                            }
+                            if (money.Text == "")
+                            {
+                                MessageBox.Show("Введите корректную сумму перевода!");
+                            }
+                            else
+                            {
+                                sqlCommandDoTransfer.Parameters["@fioW"].Value = fioWorker.Text;
+                                sqlCommandDoTransfer.Parameters["@phone"].Value = phone.Text;
+                                sqlCommandDoTransfer.Parameters["@fioSender"].Value = fioSender.Text;
+                                sqlCommandDoTransfer.Parameters["@pasportSender"].Value = pasportSender.Text;
+                                sqlCommandDoTransfer.Parameters["@summa"].Value = money.Text;
+                                sqlCommandDoTransfer.Parameters["@schetSender"].Value = schetSender.Text;
+                                sqlCommandDoTransfer.Parameters["@fioRecipient"].Value = fioRecipient.Text;
+                                sqlCommandDoTransfer.Parameters["@pasportRecipient"].Value = pasportRecipient.Text;
+                                sqlCommandDoTransfer.Parameters["@schetRecipient"].Value = schetRecipient.Text;
+                                sqlCommandDoTransfer.Parameters["@dateop"].Value = DateTime.Now;
+
+                                sqlConnectionDoTransfer.Open();
+                                sqlCommandDoTransfer.ExecuteNonQuery();
+                                sqlConnectionDoTransfer.Close();
+                                String result = (String)sqlCommandDoTransfer.Parameters["@res"].Value;
+                                MessageBox.Show(result);
+                            }
                         }
                     }
                 }
@@ -80,52 +129,24 @@ namespace InterfaceBank
         private void phone_KeyPress(object sender, KeyPressEventArgs e)
         {
             phone.MaxLength = 11;
-            if (Char.IsNumber(e.KeyChar) | (e.KeyChar == Convert.ToChar(",")) | e.KeyChar == '\b')
-            {
-                return;
-            }
-            else
-            {
-                e.Handled = true;
-            }
+
         }
 
         private void pasportSender_KeyPress(object sender, KeyPressEventArgs e)
         {
             pasportSender.MaxLength = 10;
-            if (Char.IsNumber(e.KeyChar) | (e.KeyChar == Convert.ToChar(",")) | e.KeyChar == '\b')
-            {
-                return;
-            }
-            else
-            {
-                e.Handled = true;
-            }
+
         }
 
         private void money_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (Char.IsNumber(e.KeyChar) | (e.KeyChar == Convert.ToChar(",")) | e.KeyChar == '\b')
-            {
-                return;
-            }
-            else
-            {
-                e.Handled = true;
-            }
+    
         }
 
         private void pasportRecipient_KeyPress(object sender, KeyPressEventArgs e)
         {
             pasportRecipient.MaxLength = 10;
-            if (Char.IsNumber(e.KeyChar) | (e.KeyChar == Convert.ToChar(",")) | e.KeyChar == '\b')
-            {
-                return;
-            }
-            else
-            {
-                e.Handled = true;
-            }
+ 
         }
 
         private void Transfers_FormClosing(object sender, FormClosingEventArgs e)
@@ -146,47 +167,94 @@ namespace InterfaceBank
             }
             else
             {
-                if (pasportSender.TextLength != 0 & pasportSender.TextLength < 10)
+                for (int i = 0; i < pasportSender.TextLength; i++)
                 {
-                    MessageBox.Show("Введите корректные паспортные данные!");
+                    char ch = pasportSender.Text[i];
+                    if (ch < 48 || ch > 57)
+                    {
+                        pasportSender.Text = "";
+                        break;
+                    }
+
+                }
+                if ((pasportSender.TextLength != 0 & pasportSender.TextLength < 10) || pasportSender.Text == "")
+                {
+                    MessageBox.Show("Введите корректные паспортные данные отправителя!");
                 }
                 else
                 {
-                    if (pasportRecipient.TextLength != 0 & pasportRecipient.TextLength < 10)
+                    for (int i = 0; i < pasportRecipient.TextLength; i++)
                     {
-                        MessageBox.Show("Введите корректные паспортные данные!");
+                        char ch = pasportRecipient.Text[i];
+                        if (ch < 48 || ch > 57)
+                        {
+                            pasportRecipient.Text = "";
+                            break;
+                        }
+
+                    }
+                    if ((pasportRecipient.TextLength != 0 & pasportRecipient.TextLength < 10) || pasportRecipient.Text == "")
+                    {
+                        MessageBox.Show("Введите корректные паспортные данные получателя!");
                     }
                     else
                     {
-                        if (phone.TextLength != 0 & phone.TextLength < 11)
+                        for (int i = 0; i < phone.TextLength; i++)
                         {
-                            MessageBox.Show("Введите корректные паспортные данные!");
+                            char ch = phone.Text[i];
+                            if (ch < 48 || ch > 57)
+                            {
+                                phone.Text = "";
+                                break;
+                            }
+
+                        }
+                        if ((phone.TextLength != 0 & phone.TextLength < 11) || phone.Text == "")
+                        {
+                            MessageBox.Show("Введите корректный номер телефона!");
                         }
                         else
                         {
-                            DialogResult dialogResult = MessageBox.Show("Вы действительно хотите отменить перевод?", "", MessageBoxButtons.YesNo);
-                            if (dialogResult == DialogResult.Yes)
+                            for (int i = 0; i < money.TextLength; i++)
                             {
-                                sqlCommandDelTransfer.Parameters["@fioW"].Value = fioWorker.Text;
-                                sqlCommandDelTransfer.Parameters["@phone"].Value = phone.Text;
-                                sqlCommandDelTransfer.Parameters["@fioSender"].Value = fioSender.Text;
-                                sqlCommandDelTransfer.Parameters["@pasportSender"].Value = pasportSender.Text;
-                                sqlCommandDelTransfer.Parameters["@summa"].Value = money.Text;
-                                sqlCommandDelTransfer.Parameters["@schetSender"].Value = schetSender.Text;
-                                sqlCommandDelTransfer.Parameters["@fioRecipient"].Value = fioRecipient.Text;
-                                sqlCommandDelTransfer.Parameters["@pasportRecipient"].Value = pasportRecipient.Text;
-                                sqlCommandDelTransfer.Parameters["@schetRecipient"].Value = schetRecipient.Text;
-                                sqlCommandDelTransfer.Parameters["@dateop"].Value = date.Text;
+                                char ch = money.Text[i];
+                                if (ch < 48 || ch > 57)
+                                {
+                                    money.Text = "";
+                                    break;
+                                }
 
-                                sqlConnectionDoTransfer.Open();
-                                sqlCommandDelTransfer.ExecuteNonQuery();
-                                sqlConnectionDoTransfer.Close();
-                                String result = (String)sqlCommandDelTransfer.Parameters["@res"].Value;
-                                MessageBox.Show(result);
                             }
-                            else if (dialogResult == DialogResult.No)
+                            if (money.Text == "")
                             {
-                                MessageBox.Show("Операция отменена!");
+                                MessageBox.Show("Введите корректную сумму перевода!");
+                            }
+                            else
+                            {
+                                DialogResult dialogResult = MessageBox.Show("Вы действительно хотите отменить перевод?", "", MessageBoxButtons.YesNo);
+                                if (dialogResult == DialogResult.Yes)
+                                {
+                                    sqlCommandDelTransfer.Parameters["@fioW"].Value = fioWorker.Text;
+                                    sqlCommandDelTransfer.Parameters["@phone"].Value = phone.Text;
+                                    sqlCommandDelTransfer.Parameters["@fioSender"].Value = fioSender.Text;
+                                    sqlCommandDelTransfer.Parameters["@pasportSender"].Value = pasportSender.Text;
+                                    sqlCommandDelTransfer.Parameters["@summa"].Value = money.Text;
+                                    sqlCommandDelTransfer.Parameters["@schetSender"].Value = schetSender.Text;
+                                    sqlCommandDelTransfer.Parameters["@fioRecipient"].Value = fioRecipient.Text;
+                                    sqlCommandDelTransfer.Parameters["@pasportRecipient"].Value = pasportRecipient.Text;
+                                    sqlCommandDelTransfer.Parameters["@schetRecipient"].Value = schetRecipient.Text;
+                                    sqlCommandDelTransfer.Parameters["@dateop"].Value = date.Text;
+
+                                    sqlConnectionDoTransfer.Open();
+                                    sqlCommandDelTransfer.ExecuteNonQuery();
+                                    sqlConnectionDoTransfer.Close();
+                                    String result = (String)sqlCommandDelTransfer.Parameters["@res"].Value;
+                                    MessageBox.Show(result);
+                                }
+                                else if (dialogResult == DialogResult.No)
+                                {
+                                    MessageBox.Show("Операция отменена!");
+                                }
                             }
                         }
                     }

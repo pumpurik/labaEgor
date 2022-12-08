@@ -37,21 +37,57 @@ namespace InterfaceBank
             }
             else
             {
-                if (pasport.TextLength != 0 & pasport.TextLength < 10)
+                for (int i = 0; i < pasport.TextLength; i++)
+                {
+                    char ch = pasport.Text[i];
+                    if (ch < 48 || ch > 57)
+                    {
+                        pasport.Text = "";
+                        break;
+                    }
+
+                }
+                if ((pasport.TextLength != 0 & pasport.TextLength < 10) || pasport.Text == "")
                 {
                     MessageBox.Show("Введите корректные паспортные данные!");
                 }
                 else
                 {
-                    if (newPasport.TextLength != 0 & newPasport.TextLength < 10)
+                    if (newPasport.TextLength != 0)
                     {
-                        MessageBox.Show("Введите корректные паспортные данные!");
+                        for (int i = 0; i < newPasport.TextLength; i++)
+                        {
+                            char ch = newPasport.Text[i];
+                            if (ch < 48 || ch > 57)
+                            {
+                                newPasport.Text = "";
+                                break;
+                            }
+
+                        }
+                        if ((newPasport.TextLength != 0 & newPasport.TextLength < 10) || newPasport.Text == "")
+                        {
+                            MessageBox.Show("Введите корректные новые паспортные данные!");
+                        }
                     }
                     else
                     {
-                        if (newPhone.TextLength != 0 & newPhone.TextLength < 11)
+                        if (newPhone.TextLength != 0)
                         {
-                            MessageBox.Show("Номер телефона заполнен неверно!");
+                            for (int i = 0; i < newPhone.TextLength; i++)
+                            {
+                                char ch = newPhone.Text[i];
+                                if (ch < 48 || ch > 57)
+                                {
+                                    newPhone.Text = "";
+                                    break;
+                                }
+
+                            }
+                            if (newPhone.TextLength != 0 & newPhone.TextLength < 11 || newPhone.Text == "")
+                            {
+                                MessageBox.Show("Новый номер телефона заполнен неверно!");
+                            }
                         }
                         else
                         {
@@ -102,40 +138,19 @@ namespace InterfaceBank
         private void pasport_KeyPress(object sender, KeyPressEventArgs e)
         {
             pasport.MaxLength = 10;
-            if (Char.IsNumber(e.KeyChar) | (e.KeyChar == Convert.ToChar(",")) | e.KeyChar == '\b')
-            {
-                return;
-            }
-            else
-            {
-                e.Handled = true;
-            }
+         
         }
 
         private void newPasport_KeyPress(object sender, KeyPressEventArgs e)
         {
             newPasport.MaxLength = 10;
-            if (Char.IsNumber(e.KeyChar) | (e.KeyChar == Convert.ToChar(",")) | e.KeyChar == '\b')
-            {
-                return;
-            }
-            else
-            {
-                e.Handled = true;
-            }
+          
         }
 
         private void newPhone_KeyPress(object sender, KeyPressEventArgs e)
         {
             newPhone.MaxLength = 11;
-            if (Char.IsNumber(e.KeyChar) | (e.KeyChar == Convert.ToChar(",")) | e.KeyChar == '\b')
-            {
-                return;
-            }
-            else
-            {
-                e.Handled = true;
-            }
+       
         }
     }
 }

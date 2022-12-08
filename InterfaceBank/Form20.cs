@@ -15,6 +15,8 @@ namespace InterfaceBank
         public PaymentsPay()
         {
             InitializeComponent();
+            DateTime now = DateTime.Now;
+            date.Value = now;
         }
 
         private void PaymentsPay_FormClosing(object sender, FormClosingEventArgs e)
@@ -38,24 +40,52 @@ namespace InterfaceBank
             else
             {
 
-                if (pasport.TextLength != 0 & pasport.TextLength < 10)
+                for (int i = 0; i < pasport.TextLength; i++)
+                {
+                    char ch = pasport.Text[i];
+                    if (ch < 48 || ch > 57)
+                    {
+                        pasport.Text = "";
+                        break;
+                    }
+
+                }
+                if ((pasport.TextLength != 0 & pasport.TextLength < 10) || pasport.Text == "")
                 {
                     MessageBox.Show("Введите корректные паспортные данные!");
                 }
+
                 else
                 {
-                    sqlCommandPayment.Parameters["@fio"].Value = Fio.Text;
-                    sqlCommandPayment.Parameters["@pasport"].Value = pasport.Text;
-                    sqlCommandPayment.Parameters["@type_pay"].Value = position.Text;
-                    sqlCommandPayment.Parameters["@date"].Value = date.Text;
-                    sqlCommandPayment.Parameters["@summa"].Value = money.Text;
-                    sqlCommandPayment.Parameters["@schet"].Value = schet.Text;
+                    for (int i = 0; i < money.TextLength; i++)
+                    {
+                        char ch = money.Text[i];
+                        if (ch < 48 || ch > 57)
+                        {
+                            money.Text = "";
+                            break;
+                        }
 
-                    sqlConnectionPayment.Open();
-                    sqlCommandPayment.ExecuteNonQuery();
-                    sqlConnectionPayment.Close();
-                    String result = (String)sqlCommandPayment.Parameters["@res"].Value;
-                    MessageBox.Show(result);
+                    }
+                    if (money.Text == "")
+                    {
+                        MessageBox.Show("Введите корректную сумму оплаты!");
+                    }
+                    else
+                    {
+                        sqlCommandPayment.Parameters["@fio"].Value = Fio.Text;
+                        sqlCommandPayment.Parameters["@pasport"].Value = pasport.Text;
+                        sqlCommandPayment.Parameters["@type_pay"].Value = position.Text;
+                        sqlCommandPayment.Parameters["@date"].Value = date.Text;
+                        sqlCommandPayment.Parameters["@summa"].Value = money.Text;
+                        sqlCommandPayment.Parameters["@schet"].Value = schet.Text;
+
+                        sqlConnectionPayment.Open();
+                        sqlCommandPayment.ExecuteNonQuery();
+                        sqlConnectionPayment.Close();
+                        String result = (String)sqlCommandPayment.Parameters["@res"].Value;
+                        MessageBox.Show(result);
+                    }
                 }
 
                 
@@ -64,27 +94,12 @@ namespace InterfaceBank
 
         private void money_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (Char.IsNumber(e.KeyChar) | (e.KeyChar == Convert.ToChar(",")) | e.KeyChar == '\b')
-            {
-                return;
-            }
-            else
-            {
-                e.Handled = true;
-            }
+
         }
 
         private void pasport_KeyPress(object sender, KeyPressEventArgs e)
         {
             pasport.MaxLength = 10;
-            if (Char.IsNumber(e.KeyChar) | (e.KeyChar == Convert.ToChar(",")) | e.KeyChar == '\b')
-            {
-                return;
-            }
-            else
-            {
-                e.Handled = true;
-            }
         }
     }
 }

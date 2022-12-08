@@ -44,7 +44,17 @@ namespace InterfaceBank
             }
             else
             {
-                if (phone.TextLength < 11)
+                for (int i = 0; i < phone.TextLength; i++)
+                {
+                    char ch = phone.Text[i];
+                    if (ch < 48 || ch > 57)
+                    {
+                        phone.Text = "";
+                        break;
+                    }
+
+                }
+                if ((phone.TextLength != 0 & phone.TextLength < 11) || phone.Text == "")
                 {
                     MessageBox.Show("Введите корректный номер телефона!");
                 }
@@ -69,14 +79,7 @@ namespace InterfaceBank
         private void phone_KeyPress(object sender, KeyPressEventArgs e)
         {
             phone.MaxLength = 11;
-            if (Char.IsNumber(e.KeyChar) | (e.KeyChar == Convert.ToChar(",")) | e.KeyChar == '\b')
-            {
-                return;
-            }
-            else
-            {
-                e.Handled = true;
-            }
+           
         }
     }
 }

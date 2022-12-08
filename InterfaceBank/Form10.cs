@@ -26,9 +26,7 @@ namespace InterfaceBank
 
         private void money_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (Char.IsNumber(e.KeyChar) | (e.KeyChar == Convert.ToChar(",")) | e.KeyChar == '\b') return;
-            else
-                e.Handled = true;
+           
         }
 
         private void insSchet_Load(object sender, EventArgs e)
@@ -44,21 +42,51 @@ namespace InterfaceBank
             }
             else
             {
-                if (pasport.TextLength != 0 & pasport.TextLength < 10)
+                for (int i = 0; i < pasport.TextLength; i++)
+                {
+                    char ch = pasport.Text[i];
+                    if (ch < 48 || ch > 57)
+                    {
+                        pasport.Text = "";
+                        break;
+                    }
+
+                }
+                if ((pasport.TextLength != 0 & pasport.TextLength < 10) || pasport.Text == "")
                 {
                     MessageBox.Show("Введите корректные паспортные данные!");
                 }
+
                 else
                 {
-                    sqlCommandUpAcc.Parameters["@fio"].Value = Fio.Text;
-                    sqlCommandUpAcc.Parameters["@pasport"].Value = pasport.Text;
-                    sqlCommandUpAcc.Parameters["@sum"].Value = money.Text;
-                    sqlCommandUpAcc.Parameters["@type_acc"].Value = scheta.Text;
-                    sqlConnectionUpAcc.Open();
-                    sqlCommandUpAcc.ExecuteNonQuery();
-                    sqlConnectionUpAcc.Close();
-                    String result = (String)sqlCommandUpAcc.Parameters["@res"].Value;
-                    MessageBox.Show(result);
+                    for (int i = 0; i < money.TextLength; i++)
+                    {
+                        char ch = money.Text[i];
+                        if (ch < 48 || ch > 57)
+                        {
+                            money.Text = "";
+                            break;
+                        }
+
+                    }
+                    if (money.Text == "")
+                    {
+                        MessageBox.Show("Введите корректную сумму пополнения!");
+                    }
+                    else
+                    {
+
+
+                        sqlCommandUpAcc.Parameters["@fio"].Value = Fio.Text;
+                        sqlCommandUpAcc.Parameters["@pasport"].Value = pasport.Text;
+                        sqlCommandUpAcc.Parameters["@sum"].Value = money.Text;
+                        sqlCommandUpAcc.Parameters["@type_acc"].Value = scheta.Text;
+                        sqlConnectionUpAcc.Open();
+                        sqlCommandUpAcc.ExecuteNonQuery();
+                        sqlConnectionUpAcc.Close();
+                        String result = (String)sqlCommandUpAcc.Parameters["@res"].Value;
+                        MessageBox.Show(result);
+                    }
                 }
             }
         }
@@ -76,14 +104,7 @@ namespace InterfaceBank
         private void pasport_KeyPress(object sender, KeyPressEventArgs e)
         {
             pasport.MaxLength = 10;
-            if (Char.IsNumber(e.KeyChar) | (e.KeyChar == Convert.ToChar(",")) | e.KeyChar == '\b')
-            {
-                return;
-            }
-            else
-            {
-                e.Handled = true;
-            }
+         
         }
     }
 }

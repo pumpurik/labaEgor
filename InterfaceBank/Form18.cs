@@ -32,27 +32,11 @@ namespace InterfaceBank
         private void phone_KeyPress(object sender, KeyPressEventArgs e)
         {
             phone.MaxLength = 11;
-            if (Char.IsNumber(e.KeyChar) | (e.KeyChar == Convert.ToChar(",")) | e.KeyChar == '\b')
-            {
-                return;
-            }
-            else
-            {
-                e.Handled = true;
-            }
         }
 
         private void pasport_KeyPress(object sender, KeyPressEventArgs e)
         {
             pasport.MaxLength = 10;
-            if (Char.IsNumber(e.KeyChar) | (e.KeyChar == Convert.ToChar(",")) | e.KeyChar == '\b')
-            {
-                return;
-            }
-            else
-            {
-                e.Handled = true;
-            }
         }
 
         private void update_Click(object sender, EventArgs e)
@@ -63,13 +47,33 @@ namespace InterfaceBank
             }
             else
             {
-                if (phone.TextLength != 0 & phone.TextLength < 11)
+                for (int i = 0; i < phone.TextLength; i++)
+                {
+                    char ch = phone.Text[i];
+                    if (ch < 48 || ch > 57)
+                    {
+                        phone.Text = "";
+                        break;
+                    }
+
+                }
+                if ((phone.TextLength != 0 & phone.TextLength < 11) || phone.Text == "")
                 {
                     MessageBox.Show("Введите корректный номер телефона!");
                 }
                 else
                 {
-                    if (pasport.TextLength != 0 & pasport.TextLength < 10)
+                    for (int i = 0; i < pasport.TextLength; i++)
+                    {
+                        char ch = pasport.Text[i];
+                        if (ch < 48 || ch > 57)
+                        {
+                            pasport.Text = "";
+                            break;
+                        }
+
+                    }
+                    if ((pasport.TextLength != 0 & pasport.TextLength < 10) || pasport.Text == "")
                     {
                         MessageBox.Show("Введите корректные паспортные данные!");
                     }

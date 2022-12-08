@@ -37,15 +37,7 @@ namespace InterfaceBank
         private void pasport_KeyPress(object sender, KeyPressEventArgs e)
         {
             pasport.MaxLength = 10;
-            if (Char.IsNumber(e.KeyChar) | (e.KeyChar == Convert.ToChar(",")) | e.KeyChar == '\b')
-            {
-                return;
-            }
-            else
-            {
-                e.Handled = true;
-            }
-            /* pasport.ShortcutsEnabled = false;*/
+         
         }
 
         private void Clients_Load(object sender, EventArgs e)
@@ -61,7 +53,17 @@ namespace InterfaceBank
             }
             else
             {
-                if (pasport.TextLength < 10)
+                for (int i = 0; i < pasport.TextLength; i++)
+                {
+                    char ch = pasport.Text[i];
+                    if (ch < 48 || ch > 57)
+                    {
+                        pasport.Text = "";
+                        break;
+                    }
+
+                }
+                if ((pasport.TextLength != 0 & pasport.TextLength < 10) || pasport.Text == "")
                 {
                     MessageBox.Show("Введите корректные паспортные данные!");
                 }
@@ -102,20 +104,37 @@ namespace InterfaceBank
             }
             else
             {
-                DialogResult dialogResult = MessageBox.Show("Вы действительно хотите удалить данного клиента?","", MessageBoxButtons.YesNo);
-                if (dialogResult == DialogResult.Yes)
+                for (int i = 0; i < pasport.TextLength; i++)
                 {
-                    sqlCommandDelClient.Parameters["@name"].Value = Fio.Text;
-                    sqlCommandDelClient.Parameters["@passport"].Value = pasport.Text;
-                    sqlConnectionClient.Open();
-                    sqlCommandDelClient.ExecuteNonQuery();
-                    sqlConnectionClient.Close();
-                    String result = (String)sqlCommandDelClient.Parameters["@res"].Value;
-                    MessageBox.Show(result);
+                    char ch = pasport.Text[i];
+                    if (ch < 48 || ch > 57)
+                    {
+                        pasport.Text = "";
+                        break;
+                    }
+
                 }
-                else if (dialogResult == DialogResult.No)
+                if ((pasport.TextLength != 0 & pasport.TextLength < 10) || pasport.Text == "")
                 {
-                    MessageBox.Show("Удаление отменено!");
+                    MessageBox.Show("Введите корректные паспортные данные!");
+                }
+                else
+                {
+                    DialogResult dialogResult = MessageBox.Show("Вы действительно хотите удалить данного клиента?", "", MessageBoxButtons.YesNo);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        sqlCommandDelClient.Parameters["@name"].Value = Fio.Text;
+                        sqlCommandDelClient.Parameters["@passport"].Value = pasport.Text;
+                        sqlConnectionClient.Open();
+                        sqlCommandDelClient.ExecuteNonQuery();
+                        sqlConnectionClient.Close();
+                        String result = (String)sqlCommandDelClient.Parameters["@res"].Value;
+                        MessageBox.Show(result);
+                    }
+                    else if (dialogResult == DialogResult.No)
+                    {
+                        MessageBox.Show("Удаление отменено!");
+                    }
                 }
               
             }
