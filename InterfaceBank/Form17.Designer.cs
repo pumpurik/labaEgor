@@ -38,11 +38,14 @@
             this.update = new System.Windows.Forms.Button();
             this.sqlConnectionGetApp = new System.Data.SqlClient.SqlConnection();
             this.sqlCommandGetApp = new System.Data.SqlClient.SqlCommand();
+            this.button2 = new System.Windows.Forms.Button();
+            this.sqlCommandGetHistory = new System.Data.SqlClient.SqlCommand();
             ((System.ComponentModel.ISupportInitialize)(this.Worker)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
             // 
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button1.Location = new System.Drawing.Point(21, 394);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(119, 33);
@@ -102,16 +105,16 @@
             this.Search.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.Search.Location = new System.Drawing.Point(615, 37);
             this.Search.Name = "Search";
-            this.Search.Size = new System.Drawing.Size(149, 54);
+            this.Search.Size = new System.Drawing.Size(149, 84);
             this.Search.TabIndex = 26;
-            this.Search.Text = "Найти ";
+            this.Search.Text = "Показать активные заявки";
             this.Search.UseVisualStyleBackColor = true;
             this.Search.Click += new System.EventHandler(this.Search_Click);
             // 
             // update
             // 
             this.update.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.update.Location = new System.Drawing.Point(610, 268);
+            this.update.Location = new System.Drawing.Point(598, 317);
             this.update.Name = "update";
             this.update.Size = new System.Drawing.Size(178, 86);
             this.update.TabIndex = 32;
@@ -127,10 +130,32 @@
             // 
             // sqlCommandGetApp
             // 
-            this.sqlCommandGetApp.CommandText = "SELECT        FIO AS [ФИО клиента], type_appl AS [Тип заявления], status AS [Стат" +
-    "ус заявления]\r\nFROM            dbo.GetAppW(@fio, @phone) AS GetAppW_1";
+            this.sqlCommandGetApp.CommandText = "SELECT        idAp AS [Айди заявки], FIO AS [ФИО клиента], type_appl AS [Тип заяв" +
+    "ки], status AS Статус\r\nFROM            dbo.GetActiveAppW(@fio, @phone) AS GetAct" +
+    "iveAppW_1";
             this.sqlCommandGetApp.Connection = this.sqlConnectionGetApp;
             this.sqlCommandGetApp.Parameters.AddRange(new System.Data.SqlClient.SqlParameter[] {
+            new System.Data.SqlClient.SqlParameter("@fio", System.Data.SqlDbType.VarChar, 1024),
+            new System.Data.SqlClient.SqlParameter("@phone", System.Data.SqlDbType.VarChar, 1024)});
+            // 
+            // button2
+            // 
+            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.button2.Location = new System.Drawing.Point(615, 142);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(149, 84);
+            this.button2.TabIndex = 33;
+            this.button2.Text = "Показать историю заявок";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // sqlCommandGetHistory
+            // 
+            this.sqlCommandGetHistory.CommandText = "SELECT        idAp AS [Айди заявки], FIO AS [ФИО клиента], type_appl AS [Тип заяв" +
+    "ки], status AS Статус\r\nFROM            dbo.GetHistoryAppW(@fio, @phone) AS GetHi" +
+    "storyAppW_1";
+            this.sqlCommandGetHistory.Connection = this.sqlConnectionGetApp;
+            this.sqlCommandGetHistory.Parameters.AddRange(new System.Data.SqlClient.SqlParameter[] {
             new System.Data.SqlClient.SqlParameter("@fio", System.Data.SqlDbType.VarChar, 1024),
             new System.Data.SqlClient.SqlParameter("@phone", System.Data.SqlDbType.VarChar, 1024)});
             // 
@@ -139,6 +164,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.update);
             this.Controls.Add(this.Search);
             this.Controls.Add(this.Worker);
@@ -168,5 +194,7 @@
         private System.Windows.Forms.Button update;
         private System.Data.SqlClient.SqlConnection sqlConnectionGetApp;
         private System.Data.SqlClient.SqlCommand sqlCommandGetApp;
+        private System.Windows.Forms.Button button2;
+        private System.Data.SqlClient.SqlCommand sqlCommandGetHistory;
     }
 }

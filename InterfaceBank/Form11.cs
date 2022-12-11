@@ -34,11 +34,6 @@ namespace InterfaceBank
             System.Windows.Forms.Application.Exit();
         }
 
-        private void pasport_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            pasport.MaxLength = 10;
-         
-        }
 
         private void Clients_Load(object sender, EventArgs e)
         {
@@ -47,30 +42,15 @@ namespace InterfaceBank
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (Fio.Text == "" || pasport.Text == "")
+            if (Fio.Text == "" )
             {
-                MessageBox.Show("Поля 'ФИО' и 'паспорт' обязательны к заполнению!");
+                MessageBox.Show("Поле 'ФИО' обязательно к заполнению!");
             }
             else
             {
-                for (int i = 0; i < pasport.TextLength; i++)
-                {
-                    char ch = pasport.Text[i];
-                    if (ch < 48 || ch > 57)
-                    {
-                        pasport.Text = "";
-                        break;
-                    }
-
-                }
-                if ((pasport.TextLength != 0 & pasport.TextLength < 10) || pasport.Text == "")
-                {
-                    MessageBox.Show("Введите корректные паспортные данные!");
-                }
-                else
-                {
+               
                     sqlCommandGetClient.Parameters["@name"].Value = Fio.Text;
-                    sqlCommandGetClient.Parameters["@passport"].Value = pasport.Text;
+                    
                     sqlConnectionClient.Open();
                     var temp = new DataTable();
                     temp.Load(sqlCommandGetClient.ExecuteReader());
@@ -81,7 +61,7 @@ namespace InterfaceBank
                         MessageBox.Show("Такого клиента не существует!");
                     }
                     sqlConnectionClient.Close();
-                }
+                
             }
             
         }
@@ -96,49 +76,8 @@ namespace InterfaceBank
             sqlConnectionClient.Close();
         }
 
-        private void delete_Click(object sender, EventArgs e)
-        {
-            if (Fio.Text == "" || pasport.Text == "")
-            {
-                MessageBox.Show("Заполните данные!");
-            }
-            else
-            {
-                for (int i = 0; i < pasport.TextLength; i++)
-                {
-                    char ch = pasport.Text[i];
-                    if (ch < 48 || ch > 57)
-                    {
-                        pasport.Text = "";
-                        break;
-                    }
-
-                }
-                if ((pasport.TextLength != 0 & pasport.TextLength < 10) || pasport.Text == "")
-                {
-                    MessageBox.Show("Введите корректные паспортные данные!");
-                }
-                else
-                {
-                    DialogResult dialogResult = MessageBox.Show("Вы действительно хотите удалить данного клиента?", "", MessageBoxButtons.YesNo);
-                    if (dialogResult == DialogResult.Yes)
-                    {
-                        sqlCommandDelClient.Parameters["@name"].Value = Fio.Text;
-                        sqlCommandDelClient.Parameters["@passport"].Value = pasport.Text;
-                        sqlConnectionClient.Open();
-                        sqlCommandDelClient.ExecuteNonQuery();
-                        sqlConnectionClient.Close();
-                        String result = (String)sqlCommandDelClient.Parameters["@res"].Value;
-                        MessageBox.Show(result);
-                    }
-                    else if (dialogResult == DialogResult.No)
-                    {
-                        MessageBox.Show("Удаление отменено!");
-                    }
-                }
-              
-            }
-        }
+       
+        
 
         private void button4_Click(object sender, EventArgs e)
         {

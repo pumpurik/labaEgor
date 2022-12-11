@@ -33,7 +33,7 @@ namespace InterfaceBank
         {
             Form  upapp = new upapp();
             upapp.Show();
-            this.Hide();
+            
         }
 
         private void Search_Click(object sender, EventArgs e)
@@ -80,6 +80,46 @@ namespace InterfaceBank
         {
             phone.MaxLength = 11;
            
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (Fio.Text == "" || phone.Text == "")
+            {
+                MessageBox.Show("Поля 'ФИО' и 'номер телефона' обязательны к заполнению!");
+            }
+            else
+            {
+                for (int i = 0; i < phone.TextLength; i++)
+                {
+                    char ch = phone.Text[i];
+                    if (ch < 48 || ch > 57)
+                    {
+                        phone.Text = "";
+                        break;
+                    }
+
+                }
+                if ((phone.TextLength != 0 & phone.TextLength < 11) || phone.Text == "")
+                {
+                    MessageBox.Show("Введите корректный номер телефона!");
+                }
+                else
+                {
+                    sqlCommandGetHistory.Parameters["@fio"].Value = Fio.Text;
+                    sqlCommandGetHistory.Parameters["@phone"].Value = phone.Text;
+                    sqlConnectionGetApp.Open();
+                    var temp = new DataTable();
+                    temp.Load(sqlCommandGetHistory.ExecuteReader());
+                    Worker.DataSource = temp;
+                    int rows = Worker.Rows.Count;
+                    if (rows == 0)
+                    {
+                        MessageBox.Show("История заявок отсутствует! Проверьте правильность ввода ФИО и номера телефона!");
+                    }
+                    sqlConnectionGetApp.Close();
+                }
+            }
         }
     }
 }

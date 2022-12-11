@@ -42,38 +42,28 @@ namespace InterfaceBank
 
         }
 
-        private void pasport_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            pasport.MaxLength = 10;
-
-        }
-
-        private void money_KeyPress(object sender, KeyPressEventArgs e)
-        {
-
-        }
 
         private void clients_Click(object sender, EventArgs e)
         {
-            if (fioWorker.Text == "" || phone.Text == "" || fioClient.Text == "" || pasport.Text == "" || money.Text == "" || schet.Text == "" || cur.Text == "")
+            if (fioWorker.Text == "" || phone.Text == "" || idSchet.Text == ""  || money.Text == "" || cur.Text == "")
             {
                 MessageBox.Show("Заполните все данные!");
             }
             else
             {
-                for (int i = 0; i < pasport.TextLength; i++)
+                for (int i = 0; i < idSchet.TextLength; i++)
                 {
-                    char ch = pasport.Text[i];
+                    char ch = idSchet.Text[i];
                     if (ch < 48 || ch > 57)
                     {
-                        pasport.Text = "";
+                        idSchet.Text = "";
                         break;
                     }
 
                 }
-                if ((pasport.TextLength != 0 & pasport.TextLength < 10) || pasport.Text == "")
+                if (idSchet.Text == "")
                 {
-                    MessageBox.Show("Введите корректные паспортные данные!");
+                    MessageBox.Show("Неверный айди счета клиента!");
                 }
                 else
                 {
@@ -111,10 +101,8 @@ namespace InterfaceBank
                         {
                             sqlCommandInsCur.Parameters["@fioW"].Value = fioWorker.Text;
                             sqlCommandInsCur.Parameters["@phone"].Value = phone.Text;
-                            sqlCommandInsCur.Parameters["@fioClient"].Value = fioClient.Text;
-                            sqlCommandInsCur.Parameters["@pasport"].Value = pasport.Text;
+                            sqlCommandInsCur.Parameters["@idSchet"].Value = idSchet.Text;
                             sqlCommandInsCur.Parameters["@summa"].Value = money.Text;
-                            sqlCommandInsCur.Parameters["@schet"].Value = schet.Text;
                             sqlCommandInsCur.Parameters["@cur"].Value = cur.Text;
                             sqlCommandInsCur.Parameters["@dateop"].Value = DateTime.Now;
 
@@ -130,28 +118,27 @@ namespace InterfaceBank
                 }
             }
         }
-
         private void button2_Click(object sender, EventArgs e)
         {
-            if (fioWorker.Text == "" || phone.Text == "" || fioClient.Text == "" || pasport.Text == "" || money.Text == "" || schet.Text == "" || cur.Text == "" || date.Text == "")
+            if (fioWorker.Text == "" || phone.Text == "" || idSchet.Text == "" || money.Text == "" || cur.Text == "")
             {
                 MessageBox.Show("Заполните все данные!");
             }
             else
             {
-                for (int i = 0; i < pasport.TextLength; i++)
+                for (int i = 0; i < idSchet.TextLength; i++)
                 {
-                    char ch = pasport.Text[i];
+                    char ch = idSchet.Text[i];
                     if (ch < 48 || ch > 57)
                     {
-                        pasport.Text = "";
+                        idSchet.Text = "";
                         break;
                     }
 
                 }
-                if ((pasport.TextLength != 0 & pasport.TextLength < 10) || pasport.Text == "")
+                if (idSchet.Text == "")
                 {
-                    MessageBox.Show("Введите корректные паспортные данные!");
+                    MessageBox.Show("Неверный айди счета клиента!");
                 }
                 else
                 {
@@ -187,44 +174,34 @@ namespace InterfaceBank
                         }
                         else
                         {
-                            DialogResult dialogResult = MessageBox.Show("Вы действительно хотите отменить перевод?", "", MessageBoxButtons.YesNo);
-                            if (dialogResult == DialogResult.Yes)
-                            {
-                                sqlCommandDelCur.Parameters["@fioW"].Value = fioWorker.Text;
-                                sqlCommandDelCur.Parameters["@phone"].Value = phone.Text;
-                                sqlCommandDelCur.Parameters["@fioClient"].Value = fioClient.Text;
-                                sqlCommandDelCur.Parameters["@pasport"].Value = pasport.Text;
-                                sqlCommandDelCur.Parameters["@summa"].Value = money.Text;
-                                sqlCommandDelCur.Parameters["@schet"].Value = schet.Text;
-                                sqlCommandDelCur.Parameters["@cur"].Value = cur.Text;
-                                sqlCommandDelCur.Parameters["@dateop"].Value = date.Text;
+                            sqlCommandDelCur.Parameters["@fioW"].Value = fioWorker.Text;
+                            sqlCommandDelCur.Parameters["@phone"].Value = phone.Text;
+                            sqlCommandDelCur.Parameters["@idSchet"].Value = idSchet.Text;
+                            sqlCommandDelCur.Parameters["@summa"].Value = money.Text;
+                            sqlCommandDelCur.Parameters["@cur"].Value = cur.Text;
+                            sqlCommandDelCur.Parameters["@dateop"].Value = date.Text;
 
 
-                                sqlConnectionInsCur.Open();
-                                sqlCommandDelCur.ExecuteNonQuery();
-                                sqlConnectionInsCur.Close();
-                                String result = (String)sqlCommandDelCur.Parameters["@res"].Value;
-                                MessageBox.Show(result);
-                            }
-                            else if (dialogResult == DialogResult.No)
-                            {
-                                MessageBox.Show("Операция отменена!");
-                            }
+                            sqlConnectionInsCur.Open();
+                            sqlCommandDelCur.ExecuteNonQuery();
+                            sqlConnectionInsCur.Close();
+                            String result = (String)sqlCommandDelCur.Parameters["@res"].Value;
+                            MessageBox.Show(result);
                         }
                     }
 
                 }
             }
         }
-
-        private void label8_Click(object sender, EventArgs e)
+        private void date_ValueChanged(object sender, EventArgs e)
         {
 
         }
 
-        private void date_ValueChanged(object sender, EventArgs e)
+        private void button3_Click(object sender, EventArgs e)
         {
-
+            Form ShowSchetaClient = new ShowSchetaClient();
+            ShowSchetaClient.Show();
         }
     }
 }

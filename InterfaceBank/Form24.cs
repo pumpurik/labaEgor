@@ -108,34 +108,32 @@ namespace InterfaceBank
 
         private void Close_Click(object sender, EventArgs e)
         {
-            if (fioClient.Text == "" || pasport.Text == "" || schet.Text == "")
+            if (idSchet.Text == "")
             {
-                MessageBox.Show("Заполните все данные!");
+                MessageBox.Show("Введите айди счета!");
             }
             else
             {
-                for (int i = 0; i < pasport.TextLength; i++)
+                for (int i = 0; i < idSchet.TextLength; i++)
                 {
-                    char ch = pasport.Text[i];
+                    char ch = idSchet.Text[i];
                     if (ch < 48 || ch > 57)
                     {
-                        pasport.Text = "";
+                        idSchet.Text = "";
                         break;
                     }
 
                 }
-                if ((pasport.TextLength != 0 & pasport.TextLength < 10) || pasport.Text == "")
+                if (idSchet.Text == "")
                 {
-                    MessageBox.Show("Введите корректные паспортные данные!");
+                    MessageBox.Show("Неверный айди счета!");
                 }
                 else
                 {
-                    DialogResult dialogResult = MessageBox.Show("Вы действительно хотите закрыт счет?", "", MessageBoxButtons.YesNo);
+                    DialogResult dialogResult = MessageBox.Show("Вы действительно хотите закрыть счет?", "", MessageBoxButtons.YesNo);
                     if (dialogResult == DialogResult.Yes)
-                    {
-                        sqlCommandDelAcc.Parameters["@fioClient"].Value = fioClient.Text;
-                        sqlCommandDelAcc.Parameters["@pasport"].Value = pasport.Text;
-                        sqlCommandDelAcc.Parameters["@schet"].Value = schet.Text;
+                    {   
+                        sqlCommandDelAcc.Parameters["@idSchet"].Value = idSchet.Text;
 
                         sqlConnectionAccount.Open();
                         sqlCommandDelAcc.ExecuteNonQuery();
@@ -149,6 +147,12 @@ namespace InterfaceBank
                     }
                 }
             }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Form ShowSchetaClient = new ShowSchetaClient();
+            ShowSchetaClient.Show();
         }
     }
 }

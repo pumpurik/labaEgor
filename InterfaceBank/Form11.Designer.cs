@@ -30,24 +30,21 @@
         {
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.Fio = new System.Windows.Forms.TextBox();
-            this.pasport = new System.Windows.Forms.TextBox();
             this.Client = new System.Windows.Forms.DataGridView();
             this.button2 = new System.Windows.Forms.Button();
-            this.delete = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.sqlConnectionClient = new System.Data.SqlClient.SqlConnection();
             this.sqlCommandClientTable = new System.Data.SqlClient.SqlCommand();
             this.sqlCommandGetClient = new System.Data.SqlClient.SqlCommand();
             this.show = new System.Windows.Forms.Button();
-            this.sqlCommandDelClient = new System.Data.SqlClient.SqlCommand();
             ((System.ComponentModel.ISupportInitialize)(this.Client)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
             // 
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button1.Location = new System.Drawing.Point(26, 394);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(119, 33);
@@ -66,30 +63,12 @@
             this.label1.TabIndex = 8;
             this.label1.Text = "Введите полные ФИО клиента:";
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label2.Location = new System.Drawing.Point(22, 118);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(357, 24);
-            this.label2.TabIndex = 9;
-            this.label2.Text = "Введите паспортные данные клиента:";
-            // 
             // Fio
             // 
-            this.Fio.Location = new System.Drawing.Point(26, 90);
+            this.Fio.Location = new System.Drawing.Point(42, 110);
             this.Fio.Name = "Fio";
             this.Fio.Size = new System.Drawing.Size(234, 20);
             this.Fio.TabIndex = 10;
-            // 
-            // pasport
-            // 
-            this.pasport.Location = new System.Drawing.Point(26, 157);
-            this.pasport.Name = "pasport";
-            this.pasport.Size = new System.Drawing.Size(190, 20);
-            this.pasport.TabIndex = 11;
-            this.pasport.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.pasport_KeyPress);
             // 
             // Client
             // 
@@ -97,15 +76,15 @@
             this.Client.AllowUserToDeleteRows = false;
             this.Client.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.Client.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.Client.Location = new System.Drawing.Point(26, 207);
+            this.Client.Location = new System.Drawing.Point(26, 182);
             this.Client.Name = "Client";
-            this.Client.Size = new System.Drawing.Size(505, 166);
+            this.Client.Size = new System.Drawing.Size(505, 191);
             this.Client.TabIndex = 12;
             // 
             // button2
             // 
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button2.Location = new System.Drawing.Point(611, 70);
+            this.button2.Location = new System.Drawing.Point(611, 90);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(149, 55);
             this.button2.TabIndex = 13;
@@ -113,21 +92,10 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // delete
-            // 
-            this.delete.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.delete.Location = new System.Drawing.Point(611, 157);
-            this.delete.Name = "delete";
-            this.delete.Size = new System.Drawing.Size(149, 55);
-            this.delete.TabIndex = 14;
-            this.delete.Text = "Удалить";
-            this.delete.UseVisualStyleBackColor = true;
-            this.delete.Click += new System.EventHandler(this.delete_Click);
-            // 
             // button4
             // 
             this.button4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button4.Location = new System.Drawing.Point(611, 239);
+            this.button4.Location = new System.Drawing.Point(611, 192);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(149, 55);
             this.button4.TabIndex = 15;
@@ -138,7 +106,7 @@
             // button5
             // 
             this.button5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button5.Location = new System.Drawing.Point(611, 318);
+            this.button5.Location = new System.Drawing.Point(611, 297);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(149, 55);
             this.button5.TabIndex = 16;
@@ -162,31 +130,21 @@
             // 
             this.sqlCommandGetClient.CommandText = "SELECT        FIO AS ФИО, Passport AS [Паспортные данные], phone AS [Номер телефо" +
     "на], birth AS [Дата рождения], gender AS Пол\r\nFROM            dbo.GetClient(@nam" +
-    "e, @passport) AS GetClient_1";
+    "e) AS GetClient_1";
             this.sqlCommandGetClient.Connection = this.sqlConnectionClient;
             this.sqlCommandGetClient.Parameters.AddRange(new System.Data.SqlClient.SqlParameter[] {
-            new System.Data.SqlClient.SqlParameter("@name", System.Data.SqlDbType.VarChar, 1024),
-            new System.Data.SqlClient.SqlParameter("@passport", System.Data.SqlDbType.VarChar, 1024)});
+            new System.Data.SqlClient.SqlParameter("@name", System.Data.SqlDbType.VarChar, 1024)});
             // 
             // show
             // 
-            this.show.Location = new System.Drawing.Point(408, 177);
+            this.show.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.show.Location = new System.Drawing.Point(345, 145);
             this.show.Name = "show";
-            this.show.Size = new System.Drawing.Size(123, 24);
+            this.show.Size = new System.Drawing.Size(186, 31);
             this.show.TabIndex = 17;
             this.show.Text = "Показать всех";
             this.show.UseVisualStyleBackColor = true;
             this.show.Click += new System.EventHandler(this.show_Click);
-            // 
-            // sqlCommandDelClient
-            // 
-            this.sqlCommandDelClient.CommandText = "DelClient";
-            this.sqlCommandDelClient.CommandType = System.Data.CommandType.StoredProcedure;
-            this.sqlCommandDelClient.Connection = this.sqlConnectionClient;
-            this.sqlCommandDelClient.Parameters.AddRange(new System.Data.SqlClient.SqlParameter[] {
-            new System.Data.SqlClient.SqlParameter("@name", System.Data.SqlDbType.VarChar),
-            new System.Data.SqlClient.SqlParameter("@passport", System.Data.SqlDbType.VarChar),
-            new System.Data.SqlClient.SqlParameter("@res", System.Data.SqlDbType.VarChar, 1000, System.Data.ParameterDirection.Output, false, ((byte)(0)), ((byte)(0)), "", System.Data.DataRowVersion.Current, null)});
             // 
             // Clients
             // 
@@ -196,12 +154,9 @@
             this.Controls.Add(this.show);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
-            this.Controls.Add(this.delete);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.Client);
-            this.Controls.Add(this.pasport);
             this.Controls.Add(this.Fio);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button1);
             this.Name = "Clients";
@@ -218,18 +173,14 @@
 
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox Fio;
-        private System.Windows.Forms.TextBox pasport;
         private System.Windows.Forms.DataGridView Client;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button delete;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
         private System.Data.SqlClient.SqlConnection sqlConnectionClient;
         private System.Data.SqlClient.SqlCommand sqlCommandClientTable;
         private System.Data.SqlClient.SqlCommand sqlCommandGetClient;
         private System.Windows.Forms.Button show;
-        private System.Data.SqlClient.SqlCommand sqlCommandDelClient;
     }
 }

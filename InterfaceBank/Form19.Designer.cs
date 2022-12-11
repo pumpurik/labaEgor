@@ -43,6 +43,7 @@
             // 
             // button1
             // 
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button1.Location = new System.Drawing.Point(33, 395);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(119, 33);
@@ -53,7 +54,7 @@
             // 
             // pasport
             // 
-            this.pasport.Location = new System.Drawing.Point(36, 181);
+            this.pasport.Location = new System.Drawing.Point(33, 181);
             this.pasport.Name = "pasport";
             this.pasport.Size = new System.Drawing.Size(276, 20);
             this.pasport.TabIndex = 13;
@@ -99,10 +100,10 @@
             // 
             // Search
             // 
-            this.Search.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.Search.Location = new System.Drawing.Point(85, 231);
+            this.Search.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.Search.Location = new System.Drawing.Point(33, 233);
             this.Search.Name = "Search";
-            this.Search.Size = new System.Drawing.Size(167, 85);
+            this.Search.Size = new System.Drawing.Size(219, 85);
             this.Search.TabIndex = 15;
             this.Search.Text = "Посмотреть новые платежные поручения";
             this.Search.UseVisualStyleBackColor = true;

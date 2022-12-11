@@ -51,30 +51,13 @@ namespace InterfaceBank
 
         private void Search_Click(object sender, EventArgs e)
         {
-            if (Fio.Text == "" || phone.Text == "")
+            if (Fio.Text == "" )
             {
-                MessageBox.Show("Поля 'ФИО' и 'номер телефона' обязательны к заполнению!");
+                MessageBox.Show("Поле 'ФИО' обязательно к заполнению!");
             }
             else
             {
-                for (int i = 0; i < phone.TextLength; i++)
-                {
-                    char ch = phone.Text[i];
-                    if (ch < 48 || ch > 57)
-                    {
-                        phone.Text = "";
-                        break;
-                    }
-
-                }
-                if ((phone.TextLength != 0 & phone.TextLength < 11) || phone.Text == "")
-                {
-                    MessageBox.Show("Введите корректный номер телефона!");
-                }
-                else
-                {
                     sqlCommandGetWorker.Parameters["@name"].Value = Fio.Text;
-                    sqlCommandGetWorker.Parameters["@phone"].Value = phone.Text;
                     sqlConnectionWorker.Open();
                     var temp = new DataTable();
                     temp.Load(sqlCommandGetWorker.ExecuteReader());
@@ -82,10 +65,9 @@ namespace InterfaceBank
                     int rows = Worker.Rows.Count;
                     if (rows == 0)
                     {
-                        MessageBox.Show("Такого клиента не существует!");
+                        MessageBox.Show("Такого сотрудника не существует!");
                     }
                     sqlConnectionWorker.Close();
-                }
             }
         }
 
@@ -103,10 +85,32 @@ namespace InterfaceBank
             this.Hide();
         }
 
-        private void phone_KeyPress(object sender, KeyPressEventArgs e)
+        private void button2_Click(object sender, EventArgs e)
         {
-            phone.MaxLength = 11;
-   
+            if (position.Text == "")
+            {
+                MessageBox.Show("Поле 'Должность' обязательно к заполнению!");
+            }
+            else
+            {
+                sqlCommandGetWorkerByPosition.Parameters["@position"].Value = position.Text;
+                sqlConnectionWorker.Open();
+                var temp = new DataTable();
+                temp.Load(sqlCommandGetWorkerByPosition.ExecuteReader());
+                Worker.DataSource = temp;
+                int rows = Worker.Rows.Count;
+                if (rows == 0)
+                {
+                    MessageBox.Show("Таких сотрудников не существует!");
+                }
+                sqlConnectionWorker.Close();
+            }
+            
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

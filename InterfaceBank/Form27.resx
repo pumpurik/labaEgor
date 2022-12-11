@@ -117,13 +117,15 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="sqlConnectionClient.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <metadata name="sqlConnectionSchetaClient.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <metadata name="sqlCommandClientTable.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>178, 17</value>
+  <metadata name="sqlCommandShow.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>214, 17</value>
   </metadata>
-  <metadata name="sqlCommandGetClient.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>363, 17</value>
-  </metadata>
+  <data name="sqlCommandShow.CommandText" xml:space="preserve">
+    <value>SELECT        accounts.account_id AS [Айди счета], clients.FIO AS [ФИО клиента], accounts.date_open AS [Дата открытия], accounts.sum AS Сумма, accounts.type_account AS [Тип счета]
+FROM            accounts INNER JOIN
+                         clients ON accounts.client_id = clients.Client_id</value>
+  </data>
 </root>

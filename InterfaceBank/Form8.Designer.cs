@@ -136,6 +136,7 @@
             // 
             // button1
             // 
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button1.Location = new System.Drawing.Point(32, 392);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(119, 33);
@@ -189,6 +190,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.Name = "Wmoney";
             this.Text = "Снять деньги";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Wmoney_FormClosing);

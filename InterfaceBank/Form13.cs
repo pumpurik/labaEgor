@@ -65,72 +65,71 @@ namespace InterfaceBank
                             }
 
                         }
-                        if ((newPasport.TextLength != 0 & newPasport.TextLength < 10) || newPasport.Text == "")
+                        if ( newPasport.TextLength < 10 || newPasport.Text == "")
                         {
                             MessageBox.Show("Введите корректные новые паспортные данные!");
+                            return;
                         }
+                    }
+                    if (newPhone.TextLength != 0)
+                    {
+                        for (int i = 0; i < newPhone.TextLength; i++)
+                        {
+                            char ch = newPhone.Text[i];
+                            if (ch < 48 || ch > 57)
+                            {
+                                newPhone.Text = "";
+                                break;
+                            }
+
+                        }
+                        if ( newPhone.TextLength < 11 || newPhone.Text == "")
+                        {
+                            MessageBox.Show("Новый номер телефона заполнен неверно!");
+                            return;
+                        }
+                    }
+                    if (newFio.Text == Fio.Text)
+                        {
+                            MessageBox.Show("Вы указали такую же фамилию!");
+                            newFio.Text = "";
+                            return;
                     }
                     else
                     {
-                        if (newPhone.TextLength != 0)
+                        if (newPasport.Text == pasport.Text)
                         {
-                            for (int i = 0; i < newPhone.TextLength; i++)
-                            {
-                                char ch = newPhone.Text[i];
-                                if (ch < 48 || ch > 57)
-                                {
-                                    newPhone.Text = "";
-                                    break;
-                                }
-
-                            }
-                            if (newPhone.TextLength != 0 & newPhone.TextLength < 11 || newPhone.Text == "")
-                            {
-                                MessageBox.Show("Новый номер телефона заполнен неверно!");
-                            }
+                            MessageBox.Show("Вы указали те же паспортные данные!");
+                            newPasport.Text = "";
+                            return;
                         }
                         else
                         {
-                            if (newFio.Text == Fio.Text)
-                            {
-                                MessageBox.Show("Вы указали такую же фамилию!");
-                                newFio.Text = "";
-                            }
-                            else
-                            {
-                                if (newPasport.Text == pasport.Text)
-                                {
-                                    MessageBox.Show("Вы указали те же паспортные данные!");
-                                    newPasport.Text = "";
-                                }
-                                else
-                                {
-                                    sqlCommandUpClient.Parameters["@fio"].Value = Fio.Text;
-                                    sqlCommandUpClient.Parameters["@pasport"].Value = pasport.Text;
-                                    sqlCommandUpClient.Parameters["@newFio"].Value = newFio.Text;
-                                    sqlCommandUpClient.Parameters["@newPasport"].Value = newPasport.Text;
-                                    sqlCommandUpClient.Parameters["@newPhone"].Value = newPhone.Text;
+                            sqlCommandUpClient.Parameters["@fio"].Value = Fio.Text;
+                            sqlCommandUpClient.Parameters["@pasport"].Value = pasport.Text;
+                            sqlCommandUpClient.Parameters["@newFio"].Value = newFio.Text;
+                            sqlCommandUpClient.Parameters["@newPasport"].Value = newPasport.Text;
+                            sqlCommandUpClient.Parameters["@newPhone"].Value = newPhone.Text;
 
-                                    sqlConnectionUpClient.Open();
-                                    sqlCommandUpClient.ExecuteNonQuery();
-                                    sqlConnectionUpClient.Close();
-                                    String result = (String)sqlCommandUpClient.Parameters["@res"].Value;
-                                    if (newFio.TextLength != 0)
-                                    {
-                                        Fio.Text = "";
-                                    }
-                                    if (newPasport.TextLength != 0)
-                                    {
-                                        pasport.Text = "";
-                                    }
-                                    MessageBox.Show(result);
-                                    newFio.Text = "";
-                                    newPasport.Text = "";
-                                    newPhone.Text = "";
-                                }
+                            sqlConnectionUpClient.Open();
+                            sqlCommandUpClient.ExecuteNonQuery();
+                            sqlConnectionUpClient.Close();
+                            String result = (String)sqlCommandUpClient.Parameters["@res"].Value;
+                            if (newFio.TextLength != 0)
+                            {
+                                Fio.Text = "";
                             }
+                            if (newPasport.TextLength != 0)
+                            {
+                                pasport.Text = "";
+                            }
+                            MessageBox.Show(result);
+                            newFio.Text = "";
+                            newPasport.Text = "";
+                            newPhone.Text = "";
                         }
                     }
+
                 }
             }
         }

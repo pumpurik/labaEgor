@@ -60,10 +60,10 @@
             // 
             // Search
             // 
-            this.Search.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.Search.Location = new System.Drawing.Point(67, 270);
+            this.Search.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.Search.Location = new System.Drawing.Point(53, 270);
             this.Search.Name = "Search";
-            this.Search.Size = new System.Drawing.Size(140, 66);
+            this.Search.Size = new System.Drawing.Size(181, 66);
             this.Search.TabIndex = 2;
             this.Search.Text = "Посмотреть историю заявок";
             this.Search.UseVisualStyleBackColor = true;
@@ -97,6 +97,7 @@
             // 
             // button1
             // 
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button1.Location = new System.Drawing.Point(34, 387);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(119, 33);

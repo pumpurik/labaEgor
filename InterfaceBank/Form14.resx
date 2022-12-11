@@ -128,6 +128,13 @@
   </metadata>
   <data name="sqlCommandGetWorker.CommandText" xml:space="preserve">
     <value>SELECT        FIO AS ФИО, birth AS [Дата рождения], gender AS Пол, phone AS [Номер телефона], position AS Должность, salary AS Зарплата, status_emp AS Статус
-FROM            dbo.GetWorker(@name, @phone) AS GetWorker_1</value>
+FROM            dbo.GetWorkerByFIO(@name) AS GetWorkerByFIO_1</value>
+  </data>
+  <metadata name="sqlCommandGetWorkerByPosition.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>533, 17</value>
+  </metadata>
+  <data name="sqlCommandGetWorkerByPosition.CommandText" xml:space="preserve">
+    <value>SELECT        FIO AS ФИО, birth AS [Дата рождения], gender AS Пол, phone AS [Номер телефона], position AS Должность, salary AS Зарплата, status_emp AS Статус
+FROM            dbo.GetWorkerByPosition(@position) AS GetWorkerByPosition_1</value>
   </data>
 </root>

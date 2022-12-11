@@ -26,7 +26,7 @@ namespace InterfaceBank
 
         private void upapp_FormClosing(object sender, FormClosingEventArgs e)
         {
-            System.Windows.Forms.Application.Exit();
+          
         }
 
         private void phone_KeyPress(object sender, KeyPressEventArgs e)
@@ -34,10 +34,6 @@ namespace InterfaceBank
             phone.MaxLength = 11;
         }
 
-        private void pasport_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            pasport.MaxLength = 10;
-        }
 
         private void update_Click(object sender, EventArgs e)
         {
@@ -63,27 +59,26 @@ namespace InterfaceBank
                 }
                 else
                 {
-                    for (int i = 0; i < pasport.TextLength; i++)
+                    for (int i = 0; i < id.TextLength; i++)
                     {
-                        char ch = pasport.Text[i];
+                        char ch = id.Text[i];
                         if (ch < 48 || ch > 57)
                         {
-                            pasport.Text = "";
+                            id.Text = "";
                             break;
                         }
 
                     }
-                    if ((pasport.TextLength != 0 & pasport.TextLength < 10) || pasport.Text == "")
+                    if ( id.Text == "")
                     {
-                        MessageBox.Show("Введите корректные паспортные данные!");
+                        MessageBox.Show("Неверное айди!");
                     }
                     else
                     {
 
                         sqlCommandUpApp.Parameters["@fio"].Value = Fio.Text;
                         sqlCommandUpApp.Parameters["@phone"].Value = phone.Text;
-                        sqlCommandUpApp.Parameters["@fioCli"].Value = fioCli.Text;
-                        sqlCommandUpApp.Parameters["@pasport"].Value = pasport.Text;
+                        sqlCommandUpApp.Parameters["@idAp"].Value = id.Text;
                         sqlCommandUpApp.Parameters["@status"].Value = status.Text;
 
                         sqlConnectionUpApp.Open();

@@ -93,7 +93,7 @@ namespace InterfaceBank
                     }
 
                 }
-                if ((phone.TextLength != 0 & phone.TextLength < 11) || phone.Text == "")
+                if (phone.TextLength < 11 || phone.Text == "")
                 {
                     MessageBox.Show("Введите корректный номер телефона!");
                 }
@@ -111,36 +111,39 @@ namespace InterfaceBank
                             }
 
                         }
-                        if ((newPhone.TextLength != 0 & newPhone.TextLength < 11) || newPhone.Text == "")
+                        if (newPhone.Text == "" || newPhone.TextLength < 11)
                         {
                             MessageBox.Show("Введите корректный новый номер телефона!");
+                            newPhone.Text = "";
+                            return;
+                        }           
+                    }
+                    //уловие зп
+                    if (newSalary.TextLength != 0)
+                    {
+                        for (int i = 0; i < newSalary.TextLength; i++)
+                        {
+                            char ch = newSalary.Text[i];
+                            if (ch < 48 || ch > 57)
+                            {
+                                newSalary.Text = "";
+                                break;
+                            }
+
+                        }
+                        if (newSalary.Text == "")
+                        {
+                            MessageBox.Show("Введите корректную зарплату!");
+                            newSalary.Text = "";
+                            return;
                         }
                     }
-                    else
-                    {
-                        if (newSalary.TextLength != 0)
-                        {
-                            for (int i = 0; i < newSalary.TextLength; i++)
-                            {
-                                char ch = newSalary.Text[i];
-                                if (ch < 48 || ch > 57)
-                                {
-                                    newSalary.Text = "";
-                                    break;
-                                }
-
-                            }
-                            if (newSalary.Text == "")
-                            {
-                                MessageBox.Show("Введите корректную зарплату!");
-                            }
-                        }
-                        else
-                        {
+         
                             if (newFio.Text == Fio.Text)
                             {
                                 MessageBox.Show("Вы указали такую же фамилию!");
                                 newFio.Text = "";
+                                return;
                             }
                             else
                             {
@@ -148,6 +151,7 @@ namespace InterfaceBank
                                 {
                                     MessageBox.Show("Вы указали такой же номер!");
                                     newPhone.Text = "";
+                                    return;
                                 }
                                 else
                                 {
@@ -175,8 +179,6 @@ namespace InterfaceBank
                                     newSalary.Text = "";
                                 }
                             }
-                        }
-                    }
                     
                 }
             }

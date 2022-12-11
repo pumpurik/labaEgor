@@ -34,13 +34,6 @@ namespace InterfaceBank
             phone.MaxLength = 11;
 
         }
-
-        private void pasport_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            pasport.MaxLength = 10;
-  
-        }
-
         private void money_KeyPress(object sender, KeyPressEventArgs e)
         {
 
@@ -48,25 +41,25 @@ namespace InterfaceBank
 
         private void Open_Click(object sender, EventArgs e)
         {
-            if (fioWorker.Text == "" || phone.Text == "" || fioClient.Text == "" || pasport.Text == "" || money.Text == "" || position.Text == "" )
+            if (fioWorker.Text == "" || phone.Text == "" || idSchet.Text == "" || money.Text == "" || position.Text == "" )
             {
                 MessageBox.Show("Заполните все данные!");
             }
             else
             {
-                for (int i = 0; i < pasport.TextLength; i++)
+                for (int i = 0; i < idSchet.TextLength; i++)
                 {
-                    char ch = pasport.Text[i];
+                    char ch = idSchet.Text[i];
                     if (ch < 48 || ch > 57)
                     {
-                        pasport.Text = "";
+                        idSchet.Text = "";
                         break;
                     }
 
                 }
-                if ((pasport.TextLength != 0 & pasport.TextLength < 10) || pasport.Text == "")
+                if (idSchet.Text == "")
                 {
-                    MessageBox.Show("Введите корректные паспортные данные!");
+                    MessageBox.Show("Неверный айди счета!");
                 }
                 else
                 {
@@ -104,8 +97,7 @@ namespace InterfaceBank
                         {
                             sqlCommandInsPay.Parameters["@fioW"].Value = fioWorker.Text;
                             sqlCommandInsPay.Parameters["@phone"].Value = phone.Text;
-                            sqlCommandInsPay.Parameters["@fioClient"].Value = fioClient.Text;
-                            sqlCommandInsPay.Parameters["@pasport"].Value = pasport.Text;
+                            sqlCommandInsPay.Parameters["@idSchet"].Value = idSchet.Text;
                             sqlCommandInsPay.Parameters["@sum_order"].Value = money.Text;
                             sqlCommandInsPay.Parameters["@type_pay"].Value = position.Text;
                             sqlCommandInsPay.Parameters["@dateop"].Value = DateTime.Now;
@@ -126,6 +118,12 @@ namespace InterfaceBank
             Form DelPayOrder = new DelPayOrder();
             DelPayOrder.Show();
             this.Hide();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Form ShowSchetaClient = new ShowSchetaClient();
+            ShowSchetaClient.Show();
         }
     }
 }

@@ -34,3 +34,4 @@ C:\Users\shavy\source\repos\InterfaceBank\InterfaceBank\obj\Debug\InterfaceBank.
 C:\Users\shavy\source\repos\InterfaceBank\InterfaceBank\obj\Debug\InterfaceBank.AddSchetClient.resources
 C:\Users\shavy\source\repos\InterfaceBank\InterfaceBank\obj\Debug\InterfaceBank.sendPaymentOrder.resources
 C:\Users\shavy\source\repos\InterfaceBank\InterfaceBank\obj\Debug\InterfaceBank.DelPayOrder.resources
+C:\Users\shavy\source\repos\InterfaceBank\InterfaceBank\obj\Debug\InterfaceBank.ShowSchetaClient.resources

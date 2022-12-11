@@ -46,6 +46,7 @@
             // 
             // button1
             // 
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button1.Location = new System.Drawing.Point(25, 394);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(119, 33);
