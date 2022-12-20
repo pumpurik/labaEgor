@@ -123,4 +123,11 @@
   <metadata name="sqlCommandGetPay.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>185, 17</value>
   </metadata>
+  <data name="sqlCommandGetPay.CommandText" xml:space="preserve">
+    <value>SELECT        sender AS Отправитель, date AS [Дата отправки], sum_order AS Сумма, status AS [Статус оплаты], type_account AS [Тип счета]
+FROM            dbo.GetPaymentClient(@fio, @pasport) AS GetPaymentClient_1</value>
+  </data>
+  <metadata name="sqlCommandPayment.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>347, 17</value>
+  </metadata>
 </root>

@@ -117,10 +117,31 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="sqlConnectionPayment.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <metadata name="sqlConnectionOperations.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <metadata name="sqlCommandPayment.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>194, 17</value>
+  <metadata name="sqlCommandTransfers.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>207, 17</value>
   </metadata>
+  <data name="sqlCommandTransfers.CommandText" xml:space="preserve">
+    <value>SELECT        fioWorker AS [ФИО сотрудника], type_ac AS [Тип счета], sender AS [ФИО отправителя], Sumary AS Сумма, fioR AS [ФИО получателя], date_op AS [Дата операции]
+FROM            dbo.GetTransfersManager(@date1, @date2) AS GetTransfersManager_1</value>
+  </data>
+  <metadata name="sqlCommandIssuF.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>380, 17</value>
+  </metadata>
+  <metadata name="sqlCommandPayment.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>531, 17</value>
+  </metadata>
+  <data name="sqlCommandPayment.CommandText" xml:space="preserve">
+    <value>SELECT        type_account AS [Тип счета], FioW AS [ФИО сотрудника], sender AS Отправитель, date AS Дата, sum_order AS Сумма, status AS Статус
+FROM            dbo.GetPaymentManager(@date1, @date2) AS GetPaymentManager_1</value>
+  </data>
+  <metadata name="sqlCommandCurrency.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>702, 17</value>
+  </metadata>
+  <data name="sqlCommandCurrency.CommandText" xml:space="preserve">
+    <value>SELECT        fioWorker AS [ФИО сотрудника], fioCli AS [ФИО клиента], Sumary AS Сумма, curInit AS [Начальная валюта], curSwap AS [Валюта после обмена], date_op AS [Дата операции]
+FROM            dbo.GetCurManager(@date1, @date2) AS GetCurManager_1</value>
+  </data>
 </root>

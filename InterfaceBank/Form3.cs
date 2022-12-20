@@ -48,5 +48,12 @@ namespace InterfaceBank
             this.Hide();
 
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Form HistoryOfOperations = new HistoryOfOperations();
+            HistoryOfOperations.Show();
+            this.Hide();
+        }
     }
 }

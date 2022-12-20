@@ -27,7 +27,6 @@ C:\Users\shavy\source\repos\InterfaceBank\InterfaceBank\obj\Debug\InterfaceBank.
 C:\Users\shavy\source\repos\InterfaceBank\InterfaceBank\obj\Debug\InterfaceBank.applications.resources
 C:\Users\shavy\source\repos\InterfaceBank\InterfaceBank\obj\Debug\InterfaceBank.upapp.resources
 C:\Users\shavy\source\repos\InterfaceBank\InterfaceBank\obj\Debug\InterfaceBank.Payments.resources
-C:\Users\shavy\source\repos\InterfaceBank\InterfaceBank\obj\Debug\InterfaceBank.PaymentsPay.resources
 C:\Users\shavy\source\repos\InterfaceBank\InterfaceBank\obj\Debug\InterfaceBank.Transfers.resources
 C:\Users\shavy\source\repos\InterfaceBank\InterfaceBank\obj\Debug\InterfaceBank.historyOftransfers.resources
 C:\Users\shavy\source\repos\InterfaceBank\InterfaceBank\obj\Debug\InterfaceBank.Currency.resources
@@ -35,3 +34,4 @@ C:\Users\shavy\source\repos\InterfaceBank\InterfaceBank\obj\Debug\InterfaceBank.
 C:\Users\shavy\source\repos\InterfaceBank\InterfaceBank\obj\Debug\InterfaceBank.sendPaymentOrder.resources
 C:\Users\shavy\source\repos\InterfaceBank\InterfaceBank\obj\Debug\InterfaceBank.DelPayOrder.resources
 C:\Users\shavy\source\repos\InterfaceBank\InterfaceBank\obj\Debug\InterfaceBank.ShowSchetaClient.resources
+C:\Users\shavy\source\repos\InterfaceBank\InterfaceBank\obj\Debug\InterfaceBank.HistoryOfOperations.resources

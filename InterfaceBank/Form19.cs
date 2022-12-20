@@ -29,12 +29,7 @@ namespace InterfaceBank
             System.Windows.Forms.Application.Exit();
         }
 
-        private void arrenge_Click(object sender, EventArgs e)
-        {
-            Form PaymentsPay = new PaymentsPay();
-            PaymentsPay.Show();
-            this.Hide();
-        }
+    
 
         private void Search_Click(object sender, EventArgs e)
         {
@@ -82,6 +77,35 @@ namespace InterfaceBank
         private void pasport_KeyPress(object sender, KeyPressEventArgs e)
         {
             pasport.MaxLength = 10;
+        }
+
+        private void tablePayment_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {  
+            if(e.RowIndex >= 0)
+            {
+                DataGridViewRow row = this.tablePayment.Rows[e.RowIndex];
+                String name = row.Cells["Отправитель"].Value.ToString();
+                String date = row.Cells["Дата отправки"].Value.ToString();
+                String sum = row.Cells["Сумма"].Value.ToString();
+                String type = row.Cells["Тип счета"].Value.ToString();
+                String status = row.Cells["Статус оплаты"].Value.ToString();
+
+
+                sqlCommandPayment.Parameters["@fio"].Value = Fio.Text;
+                sqlCommandPayment.Parameters["@pasport"].Value = pasport.Text;
+                sqlCommandPayment.Parameters["@type_pay"].Value = name;
+                sqlCommandPayment.Parameters["@date"].Value = date;
+                sqlCommandPayment.Parameters["@summa"].Value = sum;
+                sqlCommandPayment.Parameters["@schet"].Value = type;
+
+                sqlConnectionGetPay.Open();
+
+                sqlCommandPayment.ExecuteNonQuery();
+                sqlConnectionGetPay.Close();
+                String result = (String)sqlCommandPayment.Parameters["@res"].Value;
+                MessageBox.Show(result);
+            }
+
         }
     }
 }

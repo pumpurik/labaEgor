@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Payments));
             this.button1 = new System.Windows.Forms.Button();
             this.pasport = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -35,9 +36,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.tablePayment = new System.Windows.Forms.DataGridView();
             this.Search = new System.Windows.Forms.Button();
-            this.arrenge = new System.Windows.Forms.Button();
             this.sqlConnectionGetPay = new System.Data.SqlClient.SqlConnection();
             this.sqlCommandGetPay = new System.Data.SqlClient.SqlCommand();
+            this.sqlCommandPayment = new System.Data.SqlClient.SqlCommand();
             ((System.ComponentModel.ISupportInitialize)(this.tablePayment)).BeginInit();
             this.SuspendLayout();
             // 
@@ -97,6 +98,7 @@
             this.tablePayment.Name = "tablePayment";
             this.tablePayment.Size = new System.Drawing.Size(391, 231);
             this.tablePayment.TabIndex = 14;
+            this.tablePayment.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.tablePayment_CellContentClick);
             // 
             // Search
             // 
@@ -109,17 +111,6 @@
             this.Search.UseVisualStyleBackColor = true;
             this.Search.Click += new System.EventHandler(this.Search_Click);
             // 
-            // arrenge
-            // 
-            this.arrenge.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.arrenge.Location = new System.Drawing.Point(552, 325);
-            this.arrenge.Name = "arrenge";
-            this.arrenge.Size = new System.Drawing.Size(222, 56);
-            this.arrenge.TabIndex = 16;
-            this.arrenge.Text = "Оплатить";
-            this.arrenge.UseVisualStyleBackColor = true;
-            this.arrenge.Click += new System.EventHandler(this.arrenge_Click);
-            // 
             // sqlConnectionGetPay
             // 
             this.sqlConnectionGetPay.ConnectionString = "Data Source=DESKTOP-Q6VD9PD\\SQLEXPRESS01;Initial Catalog=Bank;Integrated Security" +
@@ -128,20 +119,31 @@
             // 
             // sqlCommandGetPay
             // 
-            this.sqlCommandGetPay.CommandText = "SELECT        sender AS Отправитель, date AS [Дата отправки], sum_order AS Сумма," +
-    " status AS [Статус оплаты]\r\nFROM            dbo.GetPaymentClient(@fio, @pasport)" +
-    " AS GetPaymentClient_1";
+            this.sqlCommandGetPay.CommandText = resources.GetString("sqlCommandGetPay.CommandText");
             this.sqlCommandGetPay.Connection = this.sqlConnectionGetPay;
             this.sqlCommandGetPay.Parameters.AddRange(new System.Data.SqlClient.SqlParameter[] {
             new System.Data.SqlClient.SqlParameter("@fio", System.Data.SqlDbType.VarChar, 1024),
             new System.Data.SqlClient.SqlParameter("@pasport", System.Data.SqlDbType.VarChar, 1024)});
+            // 
+            // sqlCommandPayment
+            // 
+            this.sqlCommandPayment.CommandText = "PayPaymentCli";
+            this.sqlCommandPayment.CommandType = System.Data.CommandType.StoredProcedure;
+            this.sqlCommandPayment.Connection = this.sqlConnectionGetPay;
+            this.sqlCommandPayment.Parameters.AddRange(new System.Data.SqlClient.SqlParameter[] {
+            new System.Data.SqlClient.SqlParameter("@fio", System.Data.SqlDbType.VarChar),
+            new System.Data.SqlClient.SqlParameter("@pasport", System.Data.SqlDbType.VarChar),
+            new System.Data.SqlClient.SqlParameter("@type_pay", System.Data.SqlDbType.VarChar),
+            new System.Data.SqlClient.SqlParameter("@date", System.Data.SqlDbType.Date),
+            new System.Data.SqlClient.SqlParameter("@summa", System.Data.SqlDbType.VarChar),
+            new System.Data.SqlClient.SqlParameter("@schet", System.Data.SqlDbType.VarChar),
+            new System.Data.SqlClient.SqlParameter("@res", System.Data.SqlDbType.VarChar, 255, System.Data.ParameterDirection.Output, false, ((byte)(0)), ((byte)(0)), "", System.Data.DataRowVersion.Current, null)});
             // 
             // Payments
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.arrenge);
             this.Controls.Add(this.Search);
             this.Controls.Add(this.tablePayment);
             this.Controls.Add(this.pasport);
@@ -167,8 +169,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridView tablePayment;
         private System.Windows.Forms.Button Search;
-        private System.Windows.Forms.Button arrenge;
         private System.Data.SqlClient.SqlConnection sqlConnectionGetPay;
         private System.Data.SqlClient.SqlCommand sqlCommandGetPay;
+        private System.Data.SqlClient.SqlCommand sqlCommandPayment;
     }
 }
